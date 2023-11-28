@@ -14,7 +14,7 @@ def main():
     g.add_edge("rua Rui Tijjy", "rua Diogo Barros", 90)
     g.add_edge("rua Rui Tijjy", "rua do moina", 35)
     g.add_edge("rua do moina", "rua insana", 27)
-    g.add_edge("rua insana", "rua do 1hifre", 25)
+    g.add_edge("rua insana", "rua do chifre", 25)
     g.add_edge("rua insana", "rua do pirex", 33)
     g.add_edge("rua do pirex", "rua Guilherme Rego", 16)
 
