@@ -78,10 +78,10 @@ def terminarEntrega(self, entrega, estafeta): #terminada a entrega, remove a mes
         entregasManuel.remove(entrega)
 
 def calculaRotaMaisEconomica (self, entregas): #deve retornar a melhor rota entre dois nodos
-    self.distancia = procura_DFS.last('centro de distribuicao', entrega.first.rua, path=[], visited=set())
+    self.distancia = self.procura_DFS.last('centro de distribuicao', entrega.first.rua, path=[], visited=set())
     entregas.pop()
     while entregas != None:
-        x = procura_DFS.last('centro de distribuicao', entrega.first.rua, path=[], visited=set())
+        x = self.procura_DFS.last('centro de distribuicao', entrega.first.rua, path=[], visited=set())
         if x < self.distancia : self.distancia = x
         entregas.pop()
 
