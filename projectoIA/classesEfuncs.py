@@ -85,5 +85,9 @@ def calculaRotaMaisEconomica (self, entregas): #deve retornar a melhor rota entr
         if x < self.distancia : self.distancia = x
         entregas.pop()
 
-
-
+def calculaSpeedConsoantePeso (self, entregas, meioTransporte):
+    soma = sum(entregas.peso)
+    if meioTransporte == 'bicicleta' and soma < 5 : return (10-(soma*0.6))
+    elif meioTransporte == 'mota' and soma < 20 : return (20-(soma*0.5))
+    elif meioTransporte == 'carro' and soma < 100 : return (100-(soma*0.1))
+    else : print("Excede o peso maximo")
