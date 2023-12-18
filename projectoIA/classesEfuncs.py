@@ -77,13 +77,6 @@ def terminarEntrega(self, entrega, estafeta): #terminada a entrega, remove a mes
         listaAvalsManuel.append(avaliacaoDoCliente)
         entregasManuel.remove(entrega)
 
-def calculaRotaMaisEconomica (self, entregas): #deve retornar a melhor rota entre dois nodos
-    self.distancia = self.procura_DFS.last('centro de distribuicao', entrega.first.rua, path=[], visited=set())
-    entregas.pop()
-    while entregas != None:
-        x = self.procura_DFS.last('centro de distribuicao', entrega.first.rua, path=[], visited=set())
-        if x < self.distancia : self.distancia = x
-        entregas.pop()
 
 def calculaSpeedConsoantePeso (self, entregas, meioTransporte):
     soma = sum(entregas.peso)
@@ -91,3 +84,29 @@ def calculaSpeedConsoantePeso (self, entregas, meioTransporte):
     elif meioTransporte == 'mota' and soma < 20 : return (20-(soma*0.5))
     elif meioTransporte == 'carro' and soma < 100 : return (100-(soma*0.1))
     else : print("Excede o peso maximo")
+
+def fazEntregas (self, estafeta, metodoProcura): #sabendo o metodo, vai percorrendo a lista de entregas, calcula a melhor rota para cada uma e fá-la, até chegar ao fim.
+    while estafeta.conjuntoEntregas != None:
+        if metodoProcura == 'DFS':
+            x = self.procura_DFS(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua, path=[], visited=set())
+            print(x)
+            estafeta.localizacao = entrega.first.rua
+            terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
+        elif metodoProcura == 'BFS':
+            x = self.procura_BFS(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua, path=[], visited=set())
+            print(x)
+            estafeta.localizacao = entrega.first.rua
+            terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
+        elif metodoProcura == 'A*':
+            x = self.procura_aStar(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua)
+            print(x)
+            estafeta.localizacao = entrega.first.rua
+            terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
+        elif metodoProcura == 'greedy':
+            x = self.greedy(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua)
+            print(x)
+            estafeta.localizacao = entrega.first.rua
+            terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
+
+
+

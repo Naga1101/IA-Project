@@ -1,0 +1,6 @@
+1 - para calcular a rota mais economica para um conjunto de entregas: calcular rota mais economica individualmente para cada encomenda,
+escolher a mais economica, entregar, repetir isto para o restante das encomendas. (fodido na pratica)
+
+2 - ignorar freguesias pois as ruas são únicas (sor deixou)
+
+3- pelos vistos tem que ter pelo menos 100 nodos no grafo
