@@ -1,7 +1,14 @@
+from funcoesAux import *
+from estafeta import *
 from Grafo import Graph
 
-
 def main():
+    data_filename = 'Dados.json'  # Replace with your actual file name
+    estafetas_loaded = load_Estafetas(data_filename)
+    
+    entregaTeste1 = Entrega(127, 'rua Rui Tijjy', 'Cepoes', 4, 9, '2023-8-16 17h')
+    entregaTeste2 = Entrega(898, 'rua do moina', 'Barrio', 26, 33, '2024-3-30 16h')
+    
     g = Graph()
 
     g.add_edge("centro de distribuicao", "rua Diogo Barros", 15)
@@ -14,7 +21,7 @@ def main():
     g.add_edge("rua Rui Tijjy", "rua Diogo Barros", 90)
     g.add_edge("rua Rui Tijjy", "rua do moina", 35)
     g.add_edge("rua do moina", "rua insana", 27)
-    g.add_edge("rua insana", "rua do chifre", 25)
+    g.add_edge("rua insana", "rua do 1hifre", 25)
     g.add_edge("rua insana", "rua do pirex", 33)
     g.add_edge("rua do pirex", "rua Guilherme Rego", 16)
 
@@ -41,6 +48,8 @@ def main():
         print("6-BFS")
         print("7-A*")
         print("8-Gulosa")
+        print("9-Estafetas")
+        print("10-Adicionar Encomenda")
         print("0-Saír")
 
         saida = int(input("introduza a sua opcao-> "))
@@ -77,6 +86,30 @@ def main():
             fim = input("Nodo final->")
             print(g.greedy(inicio, fim))
             l = input("prima enter para continuar")
+        elif saida == 9:
+            for estafeta_obj in estafetas_loaded:
+                print(f"Nome: {estafeta_obj.nome}")
+                for entrega_obj in estafeta_obj.conjuntoEntregas:
+                    print(f"  {entrega_obj}")
+                print(f"Carga atual: {estafeta_obj.pesoAtual}")
+                print(f"Ranking: {estafeta_obj.ranking}")
+                print(f"Meio de Transporte: {estafeta_obj.meioTransporte}")
+                print(f"Localizacao: {estafeta_obj.localizacao}")
+                print("\n")
+                if estafeta_obj.nome == "Luis":
+                    terminarEntrega(entregaTeste1, estafeta_obj)
+                    terminarEntrega(entregaTeste2, estafeta_obj)
+                    print(f"Ranking: {estafeta_obj.listaAvaliacoes} e {estafeta_obj.ranking}")
+                    if estafeta_obj.conjuntoEntregas == []:
+                        print("Foram concluidas todas as entregas")
+                    for entrega_obj in estafeta_obj.conjuntoEntregas:
+                        print(f"  {entrega_obj}")
+                    print("\n")
+        elif saida == 10:
+            entregaNova = adiciona_entrega()
+            atribui_estafeta(entregaNova, estafetas_loaded)
+            l = input("prima enter para continuar")
+            
         else:
             print("opcao invalida")
             l = input("prima enter para continuar")
