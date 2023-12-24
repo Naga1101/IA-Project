@@ -1,6 +1,7 @@
 import datetime
 import json
 from entrega import *
+from Grafo import *
 
 dataAtual = datetime.datetime.now()
 
@@ -31,7 +32,6 @@ class estafeta:
     
     def atualiza_ranking(self):
         self.ranking = sum(self.listaAvaliacoes)/len(self.listaAvaliacoes)
-        
       
 def load_Estafetas(filename):
     estafetas = []
@@ -49,3 +49,29 @@ def load_Estafetas(filename):
             estafetas.append(estafeta_obj)
 
     return estafetas
+
+def calcula_heuristica_entregas(estafeta, grafo):
+    heuristics = {"centro de distribuicao": 0}
+
+    for entrega in estafeta.conjuntoEntregas:
+        destino = entrega.rua
+
+        grafo.add_heuristica(destino, grafo.get_node_by_name(destino).getCoord(), 0)
+
+        for node in grafo.getNodes():
+            node_name = node.getName()
+
+            if node_name == "centro de distribuicao" or node_name == destino:
+                continue
+
+            heuristica = grafo.calcula_heuristica(node_name, destino)
+
+            # Add heuristic to the dictionary
+            heuristics[(node_name, destino)] = heuristica
+
+            coord = node.getCoord()
+            grafo.add_heuristica(node_name, coord, heuristica)
+
+        heuristics[(destino, destino)] = 0
+
+    return heuristics

@@ -96,10 +96,15 @@ def main():
                 print(f"Nome: {estafeta_obj.nome}")
                 for entrega_obj in estafeta_obj.conjuntoEntregas:
                     print(f"  {entrega_obj}")
+                heuristics_dict = calcula_heuristica_entregas(estafeta_obj, g)
+                print(heuristics_dict)
                 print(f"Carga atual: {estafeta_obj.pesoAtual}")
                 print(f"Ranking: {estafeta_obj.ranking}")
                 print(f"Meio de Transporte: {estafeta_obj.meioTransporte}")
                 print(f"Localizacao: {estafeta_obj.localizacao}")
+                reply = input("pretende desenhar um dos grafos(sim ou nao):")
+                if reply == "sim":
+                    g.desenha()
                 print("\n")
                 if estafeta_obj.nome == "Luis":
                     terminarEntrega(entregaTeste1, estafeta_obj)
