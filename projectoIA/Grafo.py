@@ -222,6 +222,17 @@ class Graph:
         n1 = Node(n, coord)
         if n1 in self.m_nodes:
             self.m_h[n] = estima
+        
+    ## Utilizamos a distância euclideana para calcular a heuristica através da latitude e longitude
+    def calcula_heuristica(self, n, objetivo):
+        nAtual = self.get_node_by_name(n)
+        nObj = self.get_node_by_name(objetivo)
+        coordAtual = nAtual.getCoord()
+        coordObj = nObj.getCoord()
+        
+        heuristica = math.sqrt((coordObj[1] - coordAtual[1])**2 + (coordObj[0] - coordAtual[0])**2)
+        
+        return heuristica
 
     ##########################################
     #    A*

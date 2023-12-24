@@ -25,18 +25,20 @@ def main():
     g.add_edge("rua insana",(55,40), "rua do pirex", (80,40), 21)
     g.add_edge("rua do pirex",(80,40), "rua das Lolis", (100,100), 69)
 
+    nodoDestino = "rua Brandi Love"
+
     g.add_heuristica("centro de distribuicao", (0,0), 0)
-    g.add_heuristica("rua Diogo Barros", (10,15), 2)
-    g.add_heuristica("rua da moita", (50,60), 3)
-    g.add_heuristica("rua do chifre", (40,15), 4)
-    g.add_heuristica("rua sesamo", (25,70), 5)
-    g.add_heuristica("rua Guilherme Rego", (20,0), 6)
-    g.add_heuristica("rua Brandi Love", (69,69), 7)
-    g.add_heuristica("rua Rui Tijjy", (10,50), 8)
-    g.add_heuristica("rua do moina", (0,60), 9)
-    g.add_heuristica("rua insana", (55,40), 10)
-    g.add_heuristica("rua do pirex", (80,40), 11)
-    g.add_heuristica("rua das Lolis", (100,100), 12)
+    g.add_heuristica("rua Diogo Barros", (10,15), g.calcula_heuristica("rua Diogo Barros", nodoDestino))
+    g.add_heuristica("rua da moita", (50,60), g.calcula_heuristica("rua da moita", nodoDestino))
+    g.add_heuristica("rua do chifre", (40,15), g.calcula_heuristica("rua do chifre", nodoDestino))
+    g.add_heuristica("rua sesamo", (25,70), g.calcula_heuristica("rua sesamo", nodoDestino))
+    g.add_heuristica("rua Guilherme Rego", (20,0), g.calcula_heuristica("rua Guilherme Rego", nodoDestino))
+    g.add_heuristica("rua Brandi Love", (69,69), 0)
+    g.add_heuristica("rua Rui Tijjy", (10,50), g.calcula_heuristica("rua Rui Tijjy", nodoDestino))
+    g.add_heuristica("rua do moina", (0,60), g.calcula_heuristica("rua do moina", nodoDestino))
+    g.add_heuristica("rua insana", (55,40), g.calcula_heuristica("rua insana", nodoDestino))
+    g.add_heuristica("rua do pirex", (80,40), g.calcula_heuristica("rua do pirex", nodoDestino))
+    g.add_heuristica("rua das Lolis", (100,100), g.calcula_heuristica("rua das Lolis", nodoDestino))
 
     saida = -1
     while saida != 0:
