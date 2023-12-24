@@ -10,20 +10,23 @@ def main():
     entregaTeste2 = Entrega(898, 'rua do moina', 'Barrio', 26, 33, '2024-3-30 16h')
     
     g = Graph()
-
+    g.add_edge("centro de distribuicao", (0, 0),"rua do moina",(0,70), 25)
+    g.add_edge("centro de distribuicao", (0, 0), "rua Guilherme Rego",(20,0), 30)
     g.add_edge("centro de distribuicao",(0,0), "rua Diogo Barros", (10,15), 15)
-    g.add_edge("rua Diogo Barros",(10,15), "rua da moita", (50,60), 10)
-    g.add_edge("rua da moita",(50,60), "rua do chifre", (40,15), 20)
-    g.add_edge("rua do chifre",(40,15), "rua sesamo", (25,70), 5)
+    g.add_edge("rua Diogo Barros",(10,15), "rua da moita", (60,30), 10)
+    g.add_edge("rua da moita",(60,30), "rua do chifre", (40,10), 20)
+    g.add_edge("rua do chifre",(40,10), "rua sesamo", (25,70), 5)
     g.add_edge("rua sesamo",(25,70), "rua Guilherme Rego", (20,0), 13)
     g.add_edge("rua Guilherme Rego",(20,0), "rua Brandi Love", (69,69), 50)
     g.add_edge("rua Brandi Love",(69,69), "rua Rui Tijjy", (10,50), 24)
     g.add_edge("rua Rui Tijjy",(10,50), "rua Diogo Barros", (10,15), 10)
-    g.add_edge("rua Rui Tijjy",(10,50), "rua do moina", (0,60), 18)
-    g.add_edge("rua do moina",(0,60), "rua insana", (55,40), 33)
-    g.add_edge("rua insana",(55,40), "rua do chifre", (40,15), 8)
-    g.add_edge("rua insana",(55,40), "rua do pirex", (80,40), 21)
+    g.add_edge("rua Rui Tijjy",(10,50), "rua do moina", (0,70), 18)
+    g.add_edge("rua do moina",(0,70), "rua insana", (55,80), 33)
+    g.add_edge("rua insana",(55,80), "rua do chifre", (40,10), 8)
+    g.add_edge("rua insana",(55,80), "rua do pirex", (80,40), 21)
     g.add_edge("rua do pirex",(80,40), "rua das Lolis", (100,100), 69)
+    g.add_edge("rua da moita", (60, 30), "rua do pirex",(80,40), 26)
+    g.add_edge("rua insana", (55, 80), "rua das Lolis", (100,100), 64)
 
     nodoDestino = "rua Brandi Love"
 

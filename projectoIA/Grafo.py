@@ -230,7 +230,8 @@ class Graph:
         coordAtual = nAtual.getCoord()
         coordObj = nObj.getCoord()
         
-        heuristica = math.sqrt((coordObj[1] - coordAtual[1])**2 + (coordObj[0] - coordAtual[0])**2)
+        heuristica = int(round(math.sqrt((coordObj[1] - coordAtual[1])**2 + (coordObj[0] - coordAtual[0])**2)))
+
         
         return heuristica
 
