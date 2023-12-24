@@ -30,7 +30,7 @@ class Graph:
     def __str__(self):
         out = ""
         for key in self.m_graph.keys():
-            out = out + "node" + str(key) + ": " + str(self.m_graph[key]) + "\n"
+            out += f"Node {key} ({self.get_node_by_name(key).getCoord()}): {str(self.m_graph[key])}\n"
         return out
 
     ################################
@@ -38,9 +38,8 @@ class Graph:
     ################################
 
     def get_node_by_name(self, name):
-        search_node = Node(name)
         for node in self.m_nodes:
-            if node == search_node:
+            if node.getName() == name:
                 return node
         return None
 
@@ -50,11 +49,13 @@ class Graph:
 
     def imprime_aresta(self):
         listaA = ""
-        lista = self.m_graph.keys()
-        for nodo in lista:
-            for (nodo2, custo) in self.m_graph[nodo]:
-                listaA = listaA + nodo + " ->" + nodo2 + " custo:" + str(custo) + "\n"
+        for nodo, arestas in self.m_graph.items():
+            for (nodo2, custo) in arestas:
+                coord1 = self.get_node_by_name(nodo).getCoord()
+                coord2 = self.get_node_by_name(nodo2).getCoord()
+                listaA += f"{nodo} ({coord1}) -> {nodo2} ({coord2}) custo: {str(custo)}\n"
         return listaA
+
 
     ################
     #   adicionar   aresta no grafo
@@ -182,32 +183,43 @@ class Graph:
     #########################
 
     def desenha(self):
-        ##criar lista de vertices
         lista_v = self.m_nodes
-        lista_a = []
         g = nx.Graph()
+
+        node_positions = {}
+        node_labels = {}
+        
         for nodo in lista_v:
             n = nodo.getName()
-            g.add_node(n)
+            coord = nodo.getCoord()
+            g.add_node(n, pos=coord)
+            node_positions[n] = coord
+            node_labels[n] = f"{n}\nCoord: {coord}\nHeuristic: {self.m_h.get(n, 'N/A')}"
+
             for (adjacente, peso) in self.m_graph[n]:
-                lista = (n, adjacente)
-                # lista_a.append(lista)
+                n2 = self.get_node_by_name(adjacente)
+                coord2 = n2.getCoord()
                 g.add_edge(n, adjacente, weight=peso)
 
-        pos = nx.spring_layout(g)
-        nx.draw_networkx(g, pos, with_labels=True, font_weight='bold')
-        labels = nx.get_edge_attributes(g, 'weight')
-        nx.draw_networkx_edge_labels(g, pos, edge_labels=labels)
+        pos = nx.get_node_attributes(g, 'pos')
+        nx.draw_networkx(g, pos, with_labels=False, font_weight='bold', node_size=700, node_color='skyblue')
+
+        edge_labels = nx.get_edge_attributes(g, 'weight')
+        nx.draw_networkx_edge_labels(g, pos, edge_labels=edge_labels)
+
+        nx.draw_networkx_labels(g, node_positions, labels=node_labels)
 
         plt.draw()
         plt.show()
+
+
         
     ####################################33
     #    add_heuristica   -> define heuristica para cada nodo 
     ################################
 
-    def add_heuristica(self, n, estima):
-        n1 = Node(n)
+    def add_heuristica(self, n, coord, estima):
+        n1 = Node(n, coord)
         if n1 in self.m_nodes:
             self.m_h[n] = estima
 

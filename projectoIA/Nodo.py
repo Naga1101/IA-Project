@@ -8,7 +8,7 @@ class Node:
 
 
     def __str__(self):
-        return "node " + self.m_name
+        return "node " + self.m_name + " coords:" + self.m_coord
 
     def setId(self, id):
         self.m_id = id
