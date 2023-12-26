@@ -1,4 +1,6 @@
 import datetime
+
+from entrega import Entrega
 from estafeta import *
 from entrega import *
 from Grafo import *
@@ -99,3 +101,9 @@ def fazEntregas (self, estafeta, metodoProcura): #sabendo o metodo, vai percorre
             print(x)
             estafeta.localizacao = Entrega.first.rua
             terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
+
+def listarRanking(listaEstafetas):
+    sorted_list = sorted(listaEstafetas, key=lambda x: x.ranking, reverse=True)
+    i = 0
+    for estafeta in sorted_list:
+        print(f"{i}:{estafeta.nome}, ")

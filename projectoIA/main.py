@@ -8,7 +8,7 @@ def main():
     
     entregaTeste1 = Entrega(127, 'rua Rui Tijjy', 'Cepoes', 4, 9, '2023-8-16 17h')
     entregaTeste2 = Entrega(898, 'rua do moina', 'Barrio', 26, 33, '2024-3-30 16h')
-    
+
     g = Graph()
     g.add_edge("centro de distribuicao", (0, 0),"rua do moina",(0,70), 25)
     g.add_edge("centro de distribuicao", (0, 0), "rua Guilherme Rego",(20,0), 30)

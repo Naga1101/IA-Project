@@ -6,7 +6,6 @@ class Node:
         self.m_name = str(name)
         self.m_coord = coord
 
-
     def __str__(self):
         return "node " + self.m_name + " coords:" + self.m_coord
 

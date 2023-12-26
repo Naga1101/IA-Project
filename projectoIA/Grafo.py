@@ -18,9 +18,8 @@ from Nodo import Node
 
 class Graph:
 
-    def __init__(self, directed=False):
+    def __init__(self):
         self.m_nodes = []
-        self.m_directed = directed
         self.m_graph = {}  # dicionario para armazenar os nodos e arestas
         self.m_h = {}  # dicionario para armazenar as heuristicas para cada nodo -< pesquisa informada
 
@@ -43,9 +42,9 @@ class Graph:
                 return node
         return None
 
-    ##############################3
+    ############################
     #   imprimir arestas
-    ############################333333
+    ############################
 
     def imprime_aresta(self):
         listaA = ""
@@ -56,7 +55,6 @@ class Graph:
                 listaA += f"{nodo} ({coord1}) -> {nodo2} ({coord2}) custo: {str(custo)}\n"
         return listaA
 
-
     ################
     #   adicionar   aresta no grafo
     ######################
@@ -64,23 +62,20 @@ class Graph:
     def add_edge(self, node1, coord1, node2, coord2, weight):
         n1 = Node(node1, coord1)
         n2 = Node(node2, coord2)
-        if (n1 not in self.m_nodes):
+        if n1 not in self.m_nodes:
             n1_id = len(self.m_nodes)  # numeração sequencial
             n1.setId(n1_id)
             self.m_nodes.append(n1)
             self.m_graph[node1] = []
 
-        if (n2 not in self.m_nodes):
+        if n2 not in self.m_nodes:
             n2_id = len(self.m_nodes)  # numeração sequencial
             n2.setId(n2_id)
             self.m_nodes.append(n2)
             self.m_graph[node2] = []
 
         self.m_graph[node1].append((node2, weight))  # poderia ser n1 para trabalhar com nodos no grafo
-
-        if not self.m_directed:
-              self.m_graph[node2].append((node1, weight))
-
+        self.m_graph[node2].append((node1, weight))
 
     #############################
     # devolver nodos
@@ -89,9 +84,9 @@ class Graph:
     def getNodes(self):
         return self.m_nodes
 
-    #######################
-    #    devolver o custo de uma aresta
-    ##############3
+    #######################################
+    #    devolver o custo de uma aresta   #
+    #######################################
 
     def get_arc_cost(self, node1, node2):
         custoT = math.inf
@@ -188,7 +183,7 @@ class Graph:
 
         node_positions = {}
         node_labels = {}
-        
+
         for nodo in lista_v:
             n = nodo.getName()
             coord = nodo.getCoord()
@@ -212,8 +207,6 @@ class Graph:
         plt.draw()
         plt.show()
 
-
-        
     ####################################33
     #    add_heuristica   -> define heuristica para cada nodo 
     ################################
@@ -222,24 +215,100 @@ class Graph:
         n1 = Node(n, coord)
         if n1 in self.m_nodes:
             self.m_h[n] = estima
-        
+
     ## Utilizamos a distância euclideana para calcular a heuristica através da latitude e longitude
     def calcula_heuristica(self, n, objetivo):
         nAtual = self.get_node_by_name(n)
         nObj = self.get_node_by_name(objetivo)
         coordAtual = nAtual.getCoord()
         coordObj = nObj.getCoord()
-        
-        heuristica = int(round(math.sqrt((coordObj[1] - coordAtual[1])**2 + (coordObj[0] - coordAtual[0])**2)))
 
-        
+        heuristica = int(round(math.sqrt((coordObj[1] - coordAtual[1]) ** 2 + (coordObj[0] - coordAtual[0]) ** 2)))
+
         return heuristica
+
+    def getH(self, nodo):
+        return self.m_h[nodo]
 
     ##########################################
     #    A*
     ##########################################
 
+    def getNeighbours(self, node):
+        if node in self.m_graph:
+            return self.m_graph[node]  # Placeholder - replace with actual logic
+        else:
+            return []
+
+    def calcula_est(self, calc_heurist):
+        min_estima = float('inf')
+        min_node = None
+        for node, est in calc_heurist.items():
+            if est < min_estima:
+                min_estima = est
+                min_node = node
+        return min_node
+
     def procura_aStar(self, start, end):
+        open_list = {start}
+        closed_list = set([])
+
+        g = {}
+        g[start] = 0
+
+        parents = {}
+        parents[start] = start
+        n = None
+
+        while len(open_list) > 0:
+            calc_heurist = {}
+            for v in open_list:
+                calc_heurist[v] = g[v] + self.getH(v)
+
+            print("Current node:", n)
+            print("Open list:", open_list)
+            print("Closed list:", closed_list)
+            print("g values:", g)
+            print("Heuristic values:", calc_heurist)
+
+            min_estima = self.calcula_est(calc_heurist)
+            n = min_estima
+
+            if n is None:
+                print('Path does not exist!')
+                return None
+
+            if n == end:
+                reconst_path = []
+                while parents[n] != n:
+                    reconst_path.append(n)
+                    n = parents[n]
+                reconst_path.append(start)
+                reconst_path.reverse()
+                print('Optimal Path found:', reconst_path)
+                print('Total Cost:', self.calcula_custo(reconst_path))
+                return (reconst_path, self.calcula_custo(reconst_path))
+
+            for (m, weight) in self.getNeighbours(n):
+                if m not in open_list and m not in closed_list:
+                    open_list.add(m)
+                    parents[m] = n
+                    g[m] = g[n] + weight
+                else:
+                    if g[m] > g[n] + weight:
+                        g[m] = g[n] + weight
+                        parents[m] = n
+                        if m in closed_list:
+                            closed_list.remove(m)
+                            open_list.add(m)
+
+            open_list.remove(n)
+            closed_list.add(n)
+
+        print('Path does not exist!')
+        return None
+
+    '''def procura_aStar(self, start, end):
         # open_list is a list of nodes which have been visited, but who's neighbors
         # haven't all been inspected, starts off with the start node
         # closed_list is a list of nodes which have been visited
@@ -256,7 +325,7 @@ class Graph:
         # parents contains an adjacency map of all nodes
         parents = {}
         parents[start] = start
-        #n = None
+        # n = None
         while len(open_list) > 0:
             # find a node with the lowest value of f() - evaluation function
             n = None
@@ -264,7 +333,13 @@ class Graph:
             # find a node with the lowest value of f() - evaluation function
             for v in open_list:
                 ##if n == None or g[v] + self.getH(v) < g[n] + self.getH(n):  # heuristica ver.....
+
+                print("\n")
+                print(self.getH(v), "HEURISTICA")
+                print(g[v], "NAO SEI")
+                print(v, "NODO")
                 if n == None or g[v] + self.getH(v) < g[n] + self.getH(n):  # heuristica ver.....
+                    print(g[v]+self.getH(v), "SOMA HEURISTICA")
                     n = v
             if n == None:
                 print('Path does not exist!')
@@ -312,12 +387,20 @@ class Graph:
             closed_list.add(n)
 
         print('Path does not exist!')
-        return None
-        
+        return None'''
+
+    def find_best_paths_for_final_nodes(self, initial_node, final_nodes):
+        best_paths = {}  # Dictionary to store the best paths for each final node
+
+        for final_node in final_nodes:
+            path, cost = self.procura_aStar(initial_node, final_node)  # Run A* for each final node
+            if path:
+                best_paths[final_node] = (path, cost)  # Store the best path and its cost
+
+        return best_paths
     ##########################################
     #   Greedy
     ##########################################
-
 
     def greedy(self, start, end):
         # open_list é uma lista de nodos visitados, mas com vizinhos
@@ -360,14 +443,13 @@ class Graph:
 
                 return (reconst_path, self.calcula_custo(reconst_path))
             # para todos os vizinhos  do nodo corrente
-            
+
             for (m, weight) in self.getNeighbours(n):
                 # Se o nodo corrente nao esta na open nem na closed list
                 # adiciona-lo à open_list e marcar o antecessor
                 if m not in open_list and m not in closed_list:
                     open_list.add(m)
                     parents[m] = n
-
 
             # remover n da open_list e adiciona-lo à closed_list
             # porque todos os seus vizinhos foram inspecionados
@@ -376,10 +458,3 @@ class Graph:
 
         print('Path does not exist!')
         return None
-
-
-
-
-
-
-
