@@ -16,14 +16,12 @@ def getPrecoPorEntrega(self, entrega, estafeta): #calcula o preço de uma entreg
         if estafeta.meioTransporte == 'bicicleta' : self.preco * 1.1
     return self.preco
 
-def poeEmHoras(prazo): #calcula em horas o tempo limite para a entrega
-    return abs(dataAtual - prazo).total_seconds() / 3600.0
 
-def atribui_estafeta(entrega, estafetas_loaded):
+def atribui_estafeta(entrega, estafetas_loaded, distancia=40): ## distancia 40 por enquanto
     estafeta_mais_rapido = None
     maiorVelocidade = 0
     for estafeta in estafetas_loaded:
-        velocidade = calculaSpeedConsoantePeso(entrega, estafeta)
+        velocidade = calculaSpeedConsoantePeso(entrega, estafeta, distancia)
         if velocidade > maiorVelocidade or estafeta_mais_rapido == None:
             maiorVelocidade = velocidade
             estafeta_mais_rapido = estafeta
@@ -32,20 +30,36 @@ def atribui_estafeta(entrega, estafetas_loaded):
     for entrega_obj in estafeta_mais_rapido.conjuntoEntregas:
                     print(f"  {entrega_obj}")
     
-        
-def calculaSpeedConsoantePeso (entrega, estafeta):
+def poeEmHoras(prazo): #calcula em horas o tempo limite para a entrega
+    return abs(dataAtual - prazo).total_seconds() / 3600.0
+
+def chega_a_tempo(prazo, velocidade, distancia, estafeta): #velocidade km\h ex 20km\h ---> 20km em 1 hora se distanca for 40 e tempoEntrega = 1 retorna -1
+    tempoLimite = poeEmHoras(prazo)
+    tempoChegar = distancia / velocidade
+    
+    if tempoChegar < tempoLimite:
+        print("A entrega chega dentro do prazo com o estafeta", estafeta.nome)
+        return velocidade
+    
+    print("A entrega não chega a tempo com o estafeta", estafeta.nome)
+    return -1
+
+def calculaSpeedConsoantePeso (entrega, estafeta, distancia): # calcula velocidade em km\h
     veiculo = estafeta.meioTransporte
     pesoMax, velocidadeMax = meioTransportes[veiculo]
     soma = estafeta.pesoAtual + int(entrega.peso)
     if soma < pesoMax:
         if veiculo == 'bicicleta': 
-            return (velocidadeMax-(soma*0.6))
+            velocidade = (velocidadeMax-(soma*0.6))
         elif veiculo == 'mota': 
-            return (velocidadeMax-(soma*0.5))
+            velocidade = (velocidadeMax-(soma*0.5))
         elif veiculo == 'carro': 
-            return (velocidadeMax-(soma*0.1))
+            velocidade = (velocidadeMax-(soma*0.1))
+        
+        velocidade = chega_a_tempo(entrega.prazo, velocidade, distancia, estafeta)
+        return velocidade
     else: 
-        print("Excede o peso maximo")
+        print("Excede o peso maximo do estafeta", estafeta.nome)
         return -1
 
 ### Terminar Encomenda

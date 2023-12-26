@@ -1,3 +1,5 @@
+import datetime 
+
 from funcoesAux import *
 from Grafo import *
 from Nodo import *
@@ -38,8 +40,13 @@ def adiciona_entrega():
     eF = input("Freguesia: ")
     eV = input("Volume da encomenda: ")
     eP = input("Peso da encomenda: ")
-    eD = input("Data e hora em que pretende receber a encomenda(a/m/d e nh): " )
+    eD_str = input("Data e hora em que pretende receber a encomenda(a-m-d e h:m): " )
     
+    try:
+        eD = datetime.datetime.strptime(eD_str, "%Y-%m-%d %H:%M")
+    except ValueError as e:
+        print(f"Error: {e}")
+        
     entregaNova = Entrega(eC, eR, eF, eV, eP, eD)
     print(entregaNova)
     return entregaNova
