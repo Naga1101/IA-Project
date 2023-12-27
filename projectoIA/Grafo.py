@@ -180,6 +180,8 @@ class Graph:
             path.reverse()
             # funçao calcula custo caminho
             custo = self.calcula_custo(path)
+        else:
+            return None
         return (path, custo)
 
     ###########################

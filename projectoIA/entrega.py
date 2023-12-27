@@ -1,6 +1,6 @@
 import datetime
-
 from funcoesAux import *
+from Grafo import Graph
 from Grafo import *
 from Nodo import *
 import random
@@ -53,3 +53,90 @@ def adiciona_entrega():
     entregaNova = Entrega(eC, eR, eF, eV, eP, eD)
     print(entregaNova)
     return entregaNova
+
+
+def terminarEntrega2(entrega, estafeta):  #### Feita e a funcionar
+    prazo_datetime = datetime.datetime.strptime(entrega.prazo, '%Y-%m-%d %Hh')
+    if datetime.datetime.now() > prazo_datetime:
+        estafeta.listaAvaliacoes.append(0)
+        print("Entrega atrasada! Penalização no ranking.")
+    else:
+        avaliacaoDoCliente = input("Como avalia a sua experiência? ")
+        print("")
+        estafeta.listaAvaliacoes.append(int(avaliacaoDoCliente))
+    estafeta.remove_entrega(entrega)
+    estafeta.atualiza_ranking()
+
+
+def iniciarEntregasDFS(g, estafetas_loaded):
+    caminho_final = []
+    for estafeta in estafetas_loaded:
+        atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
+        #for entrega in estafeta.conjuntoEntregas:
+        while estafeta.conjuntoEntregas:
+            entrega = estafeta.conjuntoEntregas[0]
+            # g.procuraDFS(atual, entrega.rua, path=[], visited=set())
+            res = g.procura_DFS(atual, entrega.rua, path=[], visited=set())
+            if res is None:
+                print("Não foi possivel realizar a entrega")
+                print(entrega.rua)
+                estafeta.conjuntoEntregas.pop(0)
+            else:
+                caminho_final.append(res)
+                terminarEntrega2(entrega, estafeta)
+                atual = entrega.rua
+
+    return caminho_final
+
+def iniciarEntregasBFS(g, estafetas_loaded):
+    caminho_final = []
+    for estafeta in estafetas_loaded:
+        atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
+        #for entrega in estafeta.conjuntoEntregas:
+        while estafeta.conjuntoEntregas:
+            entrega = estafeta.conjuntoEntregas[0]
+            # g.procuraDFS(atual, entrega.rua, path=[], visited=set())
+            res = g.procura_BFS(atual, entrega.rua)
+            if res is None:
+                print("Não foi possivel realizar a entrega")
+                print(entrega.rua)
+                estafeta.conjuntoEntregas.pop(0)
+            else:
+                caminho_final.append(res)
+                terminarEntrega2(entrega, estafeta)
+                atual = entrega.rua
+
+    return caminho_final
+
+def iniciarEntregaGreedy(g, estafetas_loaded):
+    caminho_final = []
+    for estafeta in estafetas_loaded:
+        atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
+        for entrega in estafeta.conjuntoEntregas:
+            g.calculate_all_heuristics(atual, entrega.rua)
+            print(atual, entrega.rua, "ATUAL / ENTREGA.RUA")
+            res = g.greedy(atual, entrega.rua)
+            if res is None:
+                print("Não foi possivel realizar a entrega")
+            else:
+                caminho_final.append(res)
+                terminarEntrega2(entrega, estafeta)
+                atual = entrega.rua
+
+    return caminho_final
+
+def iniciarEntregaAstar(g, estafetas_loaded):
+    caminho_final = []
+    for estafeta in estafetas_loaded:
+        atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
+        for entrega in estafeta.conjuntoEntregas:
+            g.calculate_all_heuristics(atual, entrega.rua)
+            res = g.procura_aStar(atual, entrega.rua)
+            if res is None:
+                print("Não foi possivel realizar a entrega")
+            else:
+                caminho_final.append(res)
+                terminarEntrega2(entrega, estafeta)
+                atual = entrega.rua
+
+    return caminho_final
