@@ -1,6 +1,8 @@
 from funcoesAux import *
 from estafeta import *
 from Grafo import Graph
+import osmnx as ox
+
 
 def main():
     data_filename = 'Dados.json'  # Replace with your actual file name
@@ -10,7 +12,7 @@ def main():
     entregaTeste2 = Entrega(898, 'rua do moina', 'Barrio', 26, 33, '2024-3-30 16h')
 
     g = Graph()
-    g.add_edge("centro de distribuicao", (0, 0),"rua do moina",(0,70), 25)
+    '''g.add_edge("centro de distribuicao", (0, 0),"rua do moina",(0,70), 25)
     g.add_edge("centro de distribuicao", (0, 0), "rua Guilherme Rego",(20,0), 30)
     g.add_edge("centro de distribuicao",(0,0), "rua Diogo Barros", (10,15), 15)
     g.add_edge("rua Diogo Barros",(10,15), "rua da moita", (60,30), 10)
@@ -41,7 +43,11 @@ def main():
     g.add_heuristica("rua do moina", (0,60), g.calcula_heuristica("rua do moina", nodoDestino))
     g.add_heuristica("rua insana", (55,40), g.calcula_heuristica("rua insana", nodoDestino))
     g.add_heuristica("rua do pirex", (80,40), g.calcula_heuristica("rua do pirex", nodoDestino))
-    g.add_heuristica("rua das Lolis", (100,100), g.calcula_heuristica("rua das Lolis", nodoDestino))
+    g.add_heuristica("rua das Lolis", (100,100), g.calcula_heuristica("rua das Lolis", nodoDestino))'''
+    g.parse_file('dados.csv')
+    start_node_name = "Rua José Antunes Guimarães"
+    end_node_name = "Rua Manuel Fernandes Franqueira"
+    g.calculate_all_heuristics(start_node_name, end_node_name)
 
     saida = -1
     while saida != 0:

@@ -1,0 +1,269 @@
+Avenida da Paz;(325, 428);Avenida de São Miguel;(190, 512);120
+Avenida de São Miguel;(190, 512);Bairro das Fontes;(568, 753);200
+Bairro das Fontes;(568, 753);Praceta Amândio Ferreira Pinto;(95, 892);180
+Praceta Amândio Ferreira Pinto;(95, 892);Rua 10 de Junho;(485, 671);150
+Rua 10 de Junho;(485, 671);Rua 15 de Maio;(259, 748);210
+Rua 15 de Maio;(259, 748);Rua 1º de Dezembro;(143, 587);90
+Rua 1º de Dezembro;(143, 587);Rua 1º de Janeiro;(424, 886);170
+Rua 1º de Janeiro;(424, 886);Rua 5 de Outubro;(835, 273);250
+Rua 5 de Outubro;(835, 273);Rua Amália da Costa Lima;(87, 925);140
+Rua Amália da Costa Lima;(87, 925);Rua Ana Luisa Pinto;(513, 179);180
+Rua Ana Luisa Pinto;(513, 179);Rua Álvares Cabral;(351, 912);190
+Rua Álvares Cabral;(351, 912);Rua Óscar da Costa Dias;(391, 146);200
+Rua Óscar da Costa Dias;(391, 146);Rua Óscar Dias Pereira;(642, 674);160
+Rua Óscar Dias Pereira;(642, 674);Rua Bairro do Sol;(82, 275);220
+Rua Bairro do Sol;(82, 275);Rua Bairro Henriqueta;(399, 125);180
+Rua Bairro Henriqueta;(399, 125);Rua Caixas de Água;(62, 914);190
+Rua Caixas de Água;(62, 914);Rua Campo da Margarida;(684, 738);210
+Rua Campo da Margarida;(684, 738);Rua Campo da Ribeira;(736, 219);250
+Rua Campo da Ribeira;(736, 219);Rua Carolina Rosa Alves;(319, 471);180
+Rua Carolina Rosa Alves;(319, 471);Rua Celestino Lobo;(184, 449);140
+Rua Celestino Lobo;(184, 449);Rua da Arcela;(506, 680);220
+Rua da Arcela;(506, 680);Rua da Batoca;(57, 899);250
+Rua da Batoca;(57, 899);Rua da Bela Vista;(496, 609);200
+Rua da Bela Vista;(496, 609);Rua da Bouça;(269, 731);180
+Rua da Bouça;(269, 731);Rua da Caixa;(127, 560);190
+Rua da Caixa;(127, 560);Rua da Crespa;(416, 872);210
+Rua da Crespa;(416, 872);Rua da Escola Velha;(927, 98);250
+Rua da Escola Velha;(927, 98);Rua da Estrada Nova;(102, 852);210
+Rua da Estrada Nova;(102, 852);Rua da Fonte;(554, 192);260
+Rua da Fonte;(554, 192);Rua da Igreja Nova;(392, 935);180
+Rua da Igreja Nova;(392, 935);Rua da Igreja Velha;(333, 180);210
+Rua da Igreja Velha;(333, 180);Rua da Lage;(663, 640);260
+Rua da Lage;(663, 640);Rua da Lameira;(120, 344);220
+Rua da Lameira;(120, 344);Rua da Mourisca;(422, 103);250
+Rua da Mourisca;(422, 103);Rua da Pedreira;(51, 929);290
+Rua da Pedreira;(51, 929);Rua da Pia;(686, 835);240
+Rua da Pia;(686, 835);Rua da Poça;(742, 277);200
+Rua da Poça;(742, 277);Rua da Quinta do Pomar;(328, 436);160
+Rua da Quinta do Pomar;(328, 436);Rua da Ribeira;(229, 741);190
+Rua da Ribeira;(229, 741);Rua da Universidade;(529, 509);280
+Rua da Universidade;(529, 509);Rua das Camélias;(78, 926);190
+Rua das Camélias;(78, 926);Rua das Estrelas;(497, 644);220
+Rua das Estrelas;(497, 644);Rua das Mimosas;(274, 759);180
+Rua das Mimosas;(274, 759);Rua das Oliveiras;(166, 579);200
+Rua das Oliveiras;(166, 579);Rua das Veigas;(432, 823);240
+Rua das Veigas;(432, 823);Rua das Vinhas Novas;(324, 242);260
+Rua das Vinhas Novas;(324, 242);Rua de Areias;(107, 614);230
+Rua de Areias;(107, 614);Rua de Barros;(572, 168);280
+Rua de Barros;(572, 168);Rua de Breias;(355, 904);250
+Rua de Breias;(355, 904);Rua de Novaínho;(308, 152);210
+Rua de Novaínho;(308, 152);Rua de Pousada;(688, 620);250
+Rua de Pousada;(688, 620);Rua de São Brás;(129, 347);270
+Rua de São Brás;(129, 347);Rua de Trás da Poça;(431, 101);240
+Rua de Trás da Poça;(431, 101);Rua do Alto da Mourisca;(71, 923);280
+Rua do Alto da Mourisca;(71, 923);Rua do Barreiro;(705, 843);290
+Rua do Barreiro;(705, 843);Rua do Fontão;(746, 289);250
+Rua do Fontão;(746, 289);Rua do Fontelo;(365, 427);190
+Rua do Fontelo;(365, 427);Rua do Nascente;(265, 504);180
+Rua do Nascente;(265, 504);Rua do Paço;(522, 546);210
+Rua do Paço;(522, 546);Rua do Pinheiro Manso;(134, 564);190
+Rua do Pinheiro Manso;(134, 564);Rua do Sol;(398, 694);180
+Rua do Sol;(398, 694);Rua do Solar da Quinta;(250, 351);220
+Rua do Solar da Quinta;(250, 351);Rua dos Barrócos;(68, 334);190
+Rua dos Barrócos;(68, 334);Rua dos Mouriscais;(596, 161);250
+Rua dos Mouriscais;(596, 161);Rua dos Tojais;(344, 754);210
+Rua dos Tojais;(344, 754);Rua Doutor Reis Costa;(294, 269);180
+Rua Doutor Reis Costa;(294, 269);Rua Engenheiro Nuno Alvares Pereira;(690, 650);220
+Rua Engenheiro Nuno Alvares Pereira;(690, 650);Rua Fonte do Grilo;(634, 736);190
+Rua Fonte do Grilo;(634, 736);Rua Francisco José Machado;(359, 106);250
+Rua Francisco José Machado;(359, 106);Rua Igreja Velha;(319, 328);180
+Rua Igreja Velha;(319, 328);Rua Infante Dom Henrique;(566, 603);220
+Rua Infante Dom Henrique;(566, 603);Rua Irmãos Costa;(601, 365);180
+Rua Irmãos Costa;(601, 365);Rua João Nascimento dos Santos;(428, 972);200
+Rua João Nascimento dos Santos;(428, 972);Rua José Antunes Guimarães;(682, 578);190
+Rua José Antunes Guimarães;(682, 578);Rua José da Cunha;(185, 391);230
+Rua José da Cunha;(185, 391);Rua José Ferreira Alves;(369, 171);220
+Rua José Ferreira Alves;(369, 171);Rua José Maria Rodrigues;(757, 587);260
+Rua José Maria Rodrigues;(757, 587);Rua Luís Pereira;(100, 875);280
+Rua Luís Pereira;(100, 875);Rua Luís Ramos de Azevedo;(572, 384);200
+Rua Luís Ramos de Azevedo;(572, 384);Rua Manuel Fernandes Franqueira;(255, 507);210
+Rua Manuel Fernandes Franqueira;(255, 507);Rua Manuel Pereira;(763, 107);240
+Rua Manuel Pereira;(763, 107);Rua Maria Delfina Gomes;(569, 335);190
+Rua Maria Delfina Gomes;(569, 335);Rua Maria Júlia Queirós;(268, 644);210
+Rua Maria Júlia Queirós;(268, 644);Rua Monte de Baixo;(531, 843);250
+Rua Monte de Baixo;(531, 843);Rua Monte de Cima;(746, 110);200
+Rua Monte de Cima;(746, 110);Rua Nova de Novaínho;(410, 932);280
+Rua Nova de Novaínho;(410, 932);Rua Nova do Monte de Baixo;(621, 932);190
+Rua Nova do Monte de Baixo;(621, 932);Rua Professor Manuel Barroso;(456, 975);270
+Rua Professor Manuel Barroso;(456, 975);Rua Quinta da Capa;(328, 419);240
+Rua Quinta da Capa;(328, 419);Rua Quinta do Pimpão;(165, 488);210
+Rua Quinta do Pimpão;(165, 488);Rua Vale D'Este;(513, 662);180
+Rua Vale D'Este;(513, 662);Rua Vasco da Gama;(729, 227);250
+Rua Vasco da Gama;(729, 227);Rua Velha de Barros;(581, 49);260
+Rua Velha de Barros;(581, 49);Rua Velha de Novaínho;(659, 793);270
+Rua Velha de Novaínho;(659, 793);Rua Velha do Barreiro;(996, 292);300
+Rua Velha do Barreiro;(996, 292);Rua Vicente Barbosa;(238, 502);320
+Travessa Álvares Cabral;(341, 842);Travessa da Avenida de São Miguel;(212, 137);220
+Travessa da Avenida de São Miguel;(212, 137);Travessa da Batoca;(865, 344);280
+Travessa da Batoca;(865, 344);Travessa da Lage;(685, 56);230
+Travessa da Lage;(685, 56);Travessa da Quinta do Pomar;(249, 912);270
+Travessa da Quinta do Pomar;(249, 912);Travessa de Barros;(108, 501);290
+Travessa de Barros;(108, 501);Travessa de Novaínho;(846, 316);260
+Travessa de Novaínho;(846, 316);Travessa de Pousada;(502, 70);240
+Travessa de Pousada;(502, 70);Pista Travessa do Barreiro;(348, 946);210
+Pista Travessa do Barreiro;(348, 946);Travessa do Monte de Baixo;(549, 880);220
+Travessa do Monte de Baixo;(549, 880);Travessa dos Tojais;(746, 345);180
+Travessa dos Tojais;(746, 345);Travessa Vale d'Este;(289, 421);250
+Avenida da Paz;(325, 428);Rua da Bouça;(269, 731);300
+Avenida de São Miguel;(190, 512);Rua da Caixa;(127, 560);280
+Bairro das Fontes;(568, 753);Rua da Igreja Nova;(392, 935);320
+Praceta Amândio Ferreira Pinto;(95, 892);Rua da Universidade;(529, 509);270
+Rua 10 de Junho;(485, 671);Rua das Camélias;(78, 926);330
+Rua 15 de Maio;(259, 748);Rua das Oliveiras;(166, 579);300
+Rua 1º de Dezembro;(143, 587);Rua das Estrelas;(497, 644);240
+Rua 1º de Janeiro;(424, 886);Rua das Mimosas;(274, 759);260
+Rua 5 de Outubro;(835, 273);Rua da Pedreira;(51, 929);350
+Rua Amália da Costa Lima;(87, 925);Rua da Pia;(686, 835);180
+Rua Ana Luisa Pinto;(513, 179);Rua da Poça;(742, 277);190
+Rua Álvares Cabral;(351, 912);Rua da Ribeira;(229, 741);210
+Rua Óscar da Costa Dias;(391, 146);Rua da Lameira;(120, 344);280
+Rua Óscar Dias Pereira;(642, 674);Rua da Mourisca;(422, 103);330
+Rua Bairro do Sol;(82, 275);Rua da Universidade;(529, 509);320
+Rua Bairro Henriqueta;(399, 125);Rua das Camélias;(78, 926);290
+Rua Caixas de Água;(62, 914);Rua das Oliveiras;(166, 579);310
+Rua Campo da Margarida;(684, 738);Rua 1º de Janeiro;(424, 886);250
+Rua Campo da Ribeira;(736, 219);Rua 1º de Dezembro;(143, 587);220
+Rua Carolina Rosa Alves;(319, 471);Rua 15 de Maio;(259, 748);180
+Rua Celestino Lobo;(184, 449);Rua da Bouça;(269, 731);190
+Rua da Arcela;(506, 680);Rua da Caixa;(127, 560);280
+Rua da Batoca;(57, 899);Rua da Igreja Nova;(392, 935);330
+Rua da Bela Vista;(496, 609);Rua das Mimosas;(274, 759);280
+Rua da Bouça;(269, 731);Rua da Ribeira;(229, 741);200
+Rua da Caixa;(127, 560);Rua das Oliveiras;(166, 579);220
+Rua da Crespa;(416, 872);Rua da Pedreira;(51, 929);330
+Rua da Escola Velha;(927, 98);Rua da Pedreira;(51, 929);400
+Rua da Estrada Nova;(102, 852);Rua da Universidade;(529, 509);420
+Rua da Fonte;(554, 192);Rua das Camélias;(78, 926);380
+Rua da Igreja Nova;(392, 935);Rua da Lameira;(120, 344);360
+Rua da Igreja Velha;(333, 180);Rua da Pia;(686, 835);410
+Rua da Lage;(663, 640);Rua da Poça;(742, 277);380
+Rua da Lameira;(120, 344);Rua da Ribeira;(229, 741);390
+Rua da Mourisca;(422, 103);Rua da Universidade;(529, 509);380
+Rua da Pedreira;(51, 929);Rua das Oliveiras;(166, 579);420
+Rua da Pia;(686, 835);Rua da Universidade;(529, 509);400
+Rua da Poça;(742, 277);Rua das Oliveiras;(166, 579);370
+Rua da Quinta do Pomar;(328, 436);Rua da Ribeira;(229, 741);430
+Rua da Ribeira;(229, 741);Rua das Oliveiras;(166, 579);450
+Rua da Universidade;(529, 509);Rua das Oliveiras;(166, 579);390
+Rua das Camélias;(78, 926);Rua das Oliveiras;(166, 579);360
+Rua das Oliveiras;(166, 579);Rua das Veigas;(432, 823);440
+Rua das Veigas;(432, 823);Rua das Vinhas Novas;(324, 242);390
+Rua das Vinhas Novas;(324, 242);Rua de Areias;(107, 614);420
+Rua de Areias;(107, 614);Rua de Barros;(572, 168);380
+Rua de Barros;(572, 168);Rua de Breias;(355, 904);430
+Rua de Breias;(355, 904);Rua de Novaínho;(308, 152);480
+Rua de Novaínho;(308, 152);Rua de Pousada;(688, 620);370
+Rua de Pousada;(688, 620);Rua de São Brás;(129, 347);410
+Rua de São Brás;(129, 347);Rua de Trás da Poça;(431, 101);390
+Rua de Trás da Poça;(431, 101);Rua do Alto da Mourisca;(71, 923);420
+Rua do Alto da Mourisca;(71, 923);Rua do Barreiro;(705, 843);460
+Rua do Barreiro;(705, 843);Rua do Fontão;(746, 289);390
+Rua do Fontão;(746, 289);Rua do Fontelo;(365, 427);410
+Rua do Fontelo;(365, 427);Rua do Nascente;(265, 504);380
+Rua do Nascente;(265, 504);Rua do Paço;(522, 546);420
+Rua do Paço;(522, 546);Rua do Pinheiro Manso;(134, 564);410
+Rua do Pinheiro Manso;(134, 564);Rua do Sol;(398, 694);360
+Rua do Sol;(398, 694);Rua do Solar da Quinta;(250, 351);430
+Rua do Solar da Quinta;(250, 351);Rua dos Barrócos;(68, 334);380
+Rua dos Barrócos;(68, 334);Rua dos Mouriscais;(596, 161);420
+Rua dos Mouriscais;(596, 161);Rua dos Tojais;(344, 754);390
+Rua dos Tojais;(344, 754);Rua Doutor Reis Costa;(294, 269);450
+Rua Doutor Reis Costa;(294, 269);Rua Engenheiro Nuno Alvares Pereira;(690, 650);480
+Rua Engenheiro Nuno Alvares Pereira;(690, 650);Rua Fonte do Grilo;(634, 736);410
+Rua Fonte do Grilo;(634, 736);Rua Francisco José Machado;(359, 106);470
+Rua Francisco José Machado;(359, 106);Rua Igreja Velha;(319, 328);390
+Rua Igreja Velha;(319, 328);Rua Infante Dom Henrique;(566, 603);420
+Rua Infante Dom Henrique;(566, 603);Rua Irmãos Costa;(601, 365);380
+Rua Irmãos Costa;(601, 365);Rua João Nascimento dos Santos;(428, 972);430
+Rua João Nascimento dos Santos;(428, 972);Rua José Antunes Guimarães;(682, 578);410
+Rua José Antunes Guimarães;(682, 578);Rua José da Cunha;(185, 391);450
+Rua José da Cunha;(185, 391);Rua José Ferreira Alves;(369, 171);420
+Rua José Ferreira Alves;(369, 171);Rua José Maria Rodrigues;(757, 587);470
+Rua José Maria Rodrigues;(757, 587);Rua Luís Pereira;(100, 875);480
+Rua Luís Pereira;(100, 875);Rua Luís Ramos de Azevedo;(572, 384);400
+Rua Luís Ramos de Azevedo;(572, 384);Rua Manuel Fernandes Franqueira;(255, 507);410
+Rua Manuel Fernandes Franqueira;(255, 507);Rua Manuel Pereira;(763, 107);460
+Rua Manuel Pereira;(763, 107);Rua Maria Delfina Gomes;(569, 335);420
+Rua Maria Delfina Gomes;(569, 335);Rua Maria Júlia Queirós;(268, 644);450
+Rua Maria Júlia Queirós;(268, 644);Rua Monte de Baixo;(531, 843);480
+Rua Monte de Baixo;(531, 843);Rua Monte de Cima;(746, 110);440
+Rua Monte de Cima;(746, 110);Rua Nova de Novaínho;(410, 932);490
+Rua Nova de Novaínho;(410, 932);Rua Nova do Monte de Baixo;(621, 932);420
+Rua Nova do Monte de Baixo;(621, 932);Rua Professor Manuel Barroso;(456, 975);470
+Rua Professor Manuel Barroso;(456, 975);Rua Quinta da Capa;(328, 419);440
+Rua Quinta da Capa;(328, 419);Rua Quinta do Pimpão;(165, 488);410
+Rua Quinta do Pimpão;(165, 488);Rua Vale D'Este;(513, 662);280
+Rua Vale D'Este;(513, 662);Rua Vasco da Gama;(729, 227);330
+Rua Vasco da Gama;(729, 227);Rua Velha de Barros;(581, 49);400
+Rua Velha de Barros;(581, 49);Rua Velha de Novaínho;(659, 793);340
+Rua Velha de Novaínho;(659, 793);Rua Velha do Barreiro;(996, 292);410
+Rua Velha do Barreiro;(996, 292);Rua Vicente Barbosa;(238, 502);520
+Travessa Álvares Cabral;(341, 842);Travessa da Avenida de São Miguel;(212, 137);220
+Travessa da Avenida de São Miguel;(212, 137);Travessa da Batoca;(865, 344);280
+Travessa da Batoca;(865, 344);Travessa da Lage;(685, 56);230
+Travessa da Lage;(685, 56);Travessa da Quinta do Pomar;(249, 912);270
+Travessa da Quinta do Pomar;(249, 912);Travessa de Barros;(108, 501);290
+Travessa de Barros;(108, 501);Travessa de Novaínho;(846, 316);260
+Travessa de Novaínho;(846, 316);Travessa de Pousada;(502, 70);240
+Travessa de Pousada;(502, 70);Pista Travessa do Barreiro;(348, 946);210
+Pista Travessa do Barreiro;(348, 946);Travessa do Monte de Baixo;(549, 880);220
+Travessa do Monte de Baixo;(549, 880);Travessa dos Tojais;(746, 345);180
+Travessa dos Tojais;(746, 345);Travessa Vale d'Este;(289, 421);250
+Avenida da Paz;(325, 428);Rua da Bouça;(269, 731);300
+Avenida de São Miguel;(190, 512);Rua da Caixa;(127, 560);280
+Bairro das Fontes;(568, 753);Rua da Igreja Nova;(392, 935);320
+Praceta Amândio Ferreira Pinto;(95, 892);Rua da Universidade;(529, 509);270
+Rua 10 de Junho;(485, 671);Rua das Camélias;(78, 926);330
+Rua 15 de Maio;(259, 748);Rua das Oliveiras;(166, 579);300
+Rua 1º de Dezembro;(143, 587);Rua das Estrelas;(497, 644);240
+Rua 1º de Janeiro;(424, 886);Rua das Mimosas;(274, 759);260
+Rua 5 de Outubro;(835, 273);Rua da Pedreira;(51, 929);350
+Rua Amália da Costa Lima;(87, 925);Rua da Pia;(686, 835);180
+Rua Ana Luisa Pinto;(513, 179);Rua da Poça;(742, 277);190
+Rua Álvares Cabral;(351, 912);Rua da Ribeira;(229, 741);210
+Rua Óscar da Costa Dias;(391, 146);Rua da Lameira;(120, 344);280
+Rua Óscar Dias Pereira;(642, 674);Rua da Mourisca;(422, 103);330
+Rua Bairro do Sol;(82, 275);Rua da Universidade;(529, 509);320
+Rua Bairro Henriqueta;(399, 125);Rua das Camélias;(78, 926);290
+Rua Caixas de Água;(62, 914);Rua das Oliveiras;(166, 579);310
+Rua Campo da Margarida;(684, 738);Rua 1º de Janeiro;(424, 886);250
+Rua Campo da Ribeira;(736, 219);Rua 1º de Dezembro;(143, 587);220
+Rua Carolina Rosa Alves;(319, 471);Rua 15 de Maio;(259, 748);180
+Rua Celestino Lobo;(184, 449);Rua da Bouça;(269, 731);190
+Rua da Arcela;(506, 680);Rua da Caixa;(127, 560);280
+Rua da Batoca;(57, 899);Rua da Igreja Nova;(392, 935);330
+Rua da Bela Vista;(496, 609);Rua das Mimosas;(274, 759);280
+Rua da Bouça;(269, 731);Rua da Ribeira;(229, 741);200
+Rua da Caixa;(127, 560);Rua das Oliveiras;(166, 579);220
+Rua da Crespa;(416, 872);Rua da Pedreira;(51, 929);330
+Rua da Escola Velha;(927, 98);Rua da Pedreira;(51, 929);400
+Rua da Estrada Nova;(102, 852);Rua da Universidade;(529, 509);420
+Rua da Fonte;(554, 192);Rua das Camélias;(78, 926);380
+Rua da Igreja Nova;(392, 935);Rua da Lameira;(120, 344);360
+Rua da Igreja Velha;(333, 180);Rua da Pia;(686, 835);410
+Rua da Lage;(663, 640);Rua da Poça;(742, 277);380
+Rua da Lameira;(120, 344);Rua da Ribeira;(229, 741);390
+Rua da Mourisca;(422, 103);Rua da Universidade;(529, 509);380
+Rua da Pedreira;(51, 929);Rua das Oliveiras;(166, 579);420
+Rua da Pia;(686, 835);Rua da Universidade;(529, 509);400
+Rua da Poça;(742, 277);Rua das Oliveiras;(166, 579);370
+Rua da Quinta do Pomar;(328, 436);Rua da Ribeira;(229, 741);430
+Rua da Ribeira;(229, 741);Rua das Oliveiras;(166, 579);450
+Rua da Universidade;(529, 509);Rua das Oliveiras;(166, 579);390
+Rua das Camélias;(78, 926);Rua das Oliveiras;(166, 579);360
+Rua das Oliveiras;(166, 579);Rua das Veigas;(432, 823);440
+Rua das Veigas;(432, 823);Rua das Vinhas Novas;(324, 242);390
+Rua das Vinhas Novas;(324, 242);Rua de Areias;(107, 614);420
+Rua de Areias;(107, 614);Rua de Barros;(572, 168);380
+Rua de Barros;(572, 168);Rua de Breias;(355, 904);430
+Rua de Breias;(355, 904);Rua de Novaínho;(308, 152);480
+Rua de Novaínho;(308, 152);Rua de Pousada;(688, 620);370
+Rua de Pousada;(688, 620);Rua de São Brás;(129, 347);410
+Rua de São Brás;(129, 347);Rua de Trás da Poça;(431, 101);390
+Rua de Trás da Poça;(431, 101);Rua do Alto da Mourisca;(71, 923);420
+Rua do Alto da Mourisca;(71, 923);Rua do Barreiro;(705, 843);460
+Rua do Barreiro;(705, 843);Rua do Fontão;(746, 289);390
+Rua do Fontão;(746, 289);Rua do Fontelo;(365, 427);410
+Rua do Fontelo;(365, 427);Rua do Nascente;(265, 504);380
+Rua do Nascente;(265, 504);Rua do Paço;(522, 546);420

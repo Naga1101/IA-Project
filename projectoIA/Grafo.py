@@ -23,6 +23,15 @@ class Graph:
         self.m_graph = {}  # dicionario para armazenar os nodos e arestas
         self.m_h = {}  # dicionario para armazenar as heuristicas para cada nodo -< pesquisa informada
 
+    def parse_file(self, filename):
+        with open(filename, 'r', encoding='utf-8') as file:
+            for line in file:
+                data = line.strip().split(';')
+                node1, coord1 = data[0], eval(data[1])
+                node2, coord2 = data[2], eval(data[3])
+                weight = int(data[4])
+                self.add_edge(node1, coord1, node2, coord2, weight)
+
     #############
     #    escrever o grafo como string
     #############
@@ -207,6 +216,7 @@ class Graph:
         plt.draw()
         plt.show()
 
+
     ####################################33
     #    add_heuristica   -> define heuristica para cada nodo 
     ################################
@@ -227,6 +237,17 @@ class Graph:
 
         return heuristica
 
+    def calculate_all_heuristics(self, start_node_name, end_node_name):
+        start_node = self.get_node_by_name(start_node_name)
+        end_node = self.get_node_by_name(end_node_name)
+
+        if start_node is None or end_node is None:
+            print("Error: Invalid start or end node names.")
+            return
+
+        for node in self.m_nodes:
+            heuristic_value = self.calcula_heuristica(node.getName(), end_node_name)
+            self.add_heuristica(node.getName(), node.getCoord(), heuristic_value)
     def getH(self, nodo):
         return self.m_h[nodo]
 
@@ -265,11 +286,11 @@ class Graph:
             for v in open_list:
                 calc_heurist[v] = g[v] + self.getH(v)
 
-            print("Current node:", n)
-            print("Open list:", open_list)
-            print("Closed list:", closed_list)
-            print("g values:", g)
-            print("Heuristic values:", calc_heurist)
+           # print("Current node:", n)
+            #print("Open list:", open_list)
+            #print("Closed list:", closed_list)
+            #print("g values:", g)
+            #print("Heuristic values:", calc_heurist)
 
             min_estima = self.calcula_est(calc_heurist)
             n = min_estima
