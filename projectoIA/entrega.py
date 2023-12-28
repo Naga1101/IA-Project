@@ -79,12 +79,12 @@ def terminarEntrega(entrega, estafeta):  #### Feita e a funcionar
 def iniciarEntregasDFS(g, estafetas_loaded):
     caminho_final = []
     for estafeta in estafetas_loaded:
+        distTotal = 0
         atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
         #for entrega in estafeta.conjuntoEntregas:
         while estafeta.conjuntoEntregas:
             print(estafeta.nome)
             entrega = estafeta.conjuntoEntregas[0]
-            # g.procuraDFS(atual, entrega.rua, path=[], visited=set())
             res = g.procura_DFS(atual, entrega.rua, path=[], visited=set())
             if res is None:
                 print("Não foi possivel realizar a entrega")
@@ -92,10 +92,13 @@ def iniciarEntregasDFS(g, estafetas_loaded):
                 estafeta.conjuntoEntregas.pop(0)
             else:
                 caminho, dist = res
-                print("Distância percorrida", dist)
+                #print("Distância percorrida", dist)
+                distTotal += dist
                 caminho_final.append(caminho)
                 terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
+        
+        print("O estafeta", estafeta.nome, "percorreu um total de", (distTotal/10), "decâmetros")
 
     return caminho_final
 
