@@ -2,6 +2,7 @@ import datetime
 import json
 from entrega import *
 from Grafo import *
+import copy
 
 dataAtual = datetime.datetime.now()
 

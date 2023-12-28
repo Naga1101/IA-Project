@@ -187,7 +187,7 @@ class Graph:
             custo = self.calcula_custo(path)
         else:
             return None
-        return (path, custo)
+        return path, custo
 
     ###########################
     # desenha grafo  modo grafico
@@ -313,9 +313,9 @@ class Graph:
                     n = parents[n]
                 reconst_path.append(start)
                 reconst_path.reverse()
-                print('Optimal Path found:', reconst_path)
-                print('Total Cost:', self.calcula_custo(reconst_path))
-                return (reconst_path, self.calcula_custo(reconst_path))
+                #print('Optimal Path found:', reconst_path)
+                #print('Total Cost:', self.calcula_custo(reconst_path))
+                return reconst_path, self.calcula_custo(reconst_path)
 
             for (m, weight) in self.getNeighbours(n):
                 if m not in open_list and m not in closed_list:

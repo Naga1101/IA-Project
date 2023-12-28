@@ -1,10 +1,11 @@
 import datetime
 
 from entrega import Entrega
-from estafeta import *
+from estafeta import estafeta
 from entrega import *
 from Grafo import *
 from Nodo import *
+import copy
 
 dataAtual = datetime.datetime.now()
 
@@ -69,7 +70,9 @@ def calculaSpeedConsoantePeso(entrega, estafeta, distancia):  # calcula velocida
         print("Excede o peso maximo do estafeta", estafeta.nome)
         return -1
 
-def fazEntregas(self, estafeta, metodoProcura):  # sabendo o metodo, vai percorrendo a lista de entregas, calcula a melhor rota para cada uma e fá-la, até chegar ao fim.
+
+def fazEntregas(self, estafeta,
+                metodoProcura):  # sabendo o metodo, vai percorrendo a lista de entregas, calcula a melhor rota para cada uma e fá-la, até chegar ao fim.
     while estafeta.conjuntoEntregas != None:
         if metodoProcura == 'DFS':
             x = self.procura_DFS(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua, path=[], visited=set())
@@ -98,3 +101,92 @@ def listarRanking(listaEstafetas):
     i = 0
     for estafeta in sorted_list:
         print(f"{i}:{estafeta.nome}, ")
+
+
+def copy_estafeta(estafeta):
+    return copy.deepcopy(estafeta)
+
+
+def compareAlgorithms(g, listaEstafetas):
+    DFS_results = {}
+    BFS_results = {}
+    Greedy_results = {}
+    aStar_results = {}
+    for estafeta in listaEstafetas:
+        distDFS = 0
+        atual = 'Rua da Universidade'  # centro de distribuição
+        entregas_DFS = estafeta.conjuntoEntregas.copy()
+        while entregas_DFS:
+            entrega = entregas_DFS[0]
+            res = g.procura_DFS(atual, entrega.rua, path=[], visited=set())
+
+            if res is None:
+                entregas_DFS.pop(0)
+            else:
+                caminho, dist = res
+                distDFS += dist
+                atual = entrega.rua
+                entregas_DFS.pop(0)
+
+        DFS_results[estafeta.nome] = distDFS / 10
+    print(DFS_results)
+
+    for estafeta in listaEstafetas:
+        distBFS = 0
+        atual = 'Rua da Universidade'  # centro de distribuição
+        entregas_BFS = estafeta.conjuntoEntregas.copy()
+        while entregas_BFS:
+            entrega = entregas_BFS[0]
+            res = g.procura_BFS(atual, entrega.rua)
+            if res is None:
+                entregas_BFS.pop(0)
+            else:
+                caminho, dist = res
+                distBFS += dist
+                atual = entrega.rua
+                entregas_BFS.pop(0)
+
+        BFS_results[estafeta.nome] = distBFS / 10
+
+    print(BFS_results)
+
+    for estafeta in listaEstafetas:
+        dist_greedy = 0
+        atual = 'Rua da Universidade'  # centro de distribuição
+        estafeta_Greedy = copy_estafeta(estafeta)
+        for entrega in estafeta_Greedy.conjuntoEntregas:
+            g.calculate_all_heuristics(atual, entrega.rua)
+            res = g.greedy(atual, entrega.rua)
+            if res is None:
+                pass
+                # print("Não foi possivel realizar a entrega")
+            else:
+                _, dist = res
+                # terminarEntrega(entrega, estafeta)
+                dist_greedy += dist
+                atual = entrega.rua
+                estafeta_Greedy.remove_entrega(entrega)
+
+        Greedy_results[estafeta.nome] = dist_greedy / 10
+
+    print(Greedy_results)
+
+    for estafeta in listaEstafetas:
+        dist_aStar = 0
+        atual = 'Rua da Universidade'  # centro de distribuição
+        estafeta_aStar = copy_estafeta(estafeta)
+        for entrega in estafeta_aStar.conjuntoEntregas:
+            g.calculate_all_heuristics(atual, entrega.rua)
+            res = g.procura_aStar(atual, entrega.rua)
+            if res is None:
+                pass
+                # print("Não foi possivel realizar a entrega")
+            else:
+                _, dist = res
+                dist_aStar += dist
+                atual = entrega.rua
+                estafeta_aStar.remove_entrega(entrega)
+
+        aStar_results[estafeta.nome] = dist_aStar / 10
+
+    print(aStar_results)

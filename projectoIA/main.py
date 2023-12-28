@@ -27,8 +27,9 @@ def main():
         print("6-BFS")
         print("7-A*")
         print("8-Gulosa")
-        print("9-Estafetas")
-        print("10-Adicionar Encomenda")
+        print("9-Comparar Algoritmos")
+        print("10-Estafetas")
+        print("11-Adicionar Encomenda")
         print("0-Saír")
 
         saida = int(input("introduza a sua opcao-> "))
@@ -81,6 +82,8 @@ def main():
             print(path)
             l = input("prima enter para continuar")
         elif saida == 9:
+            compareAlgorithms(g, estafetas_loaded)
+        elif saida == 10:
             for estafeta_obj in estafetas_loaded:
                 print(f"Nome: {estafeta_obj.nome}")
                 for entrega_obj in estafeta_obj.conjuntoEntregas:
@@ -104,11 +107,10 @@ def main():
                     for entrega_obj in estafeta_obj.conjuntoEntregas:
                         print(f"  {entrega_obj}")
                     print("\n")'''
-        elif saida == 10:
+        elif saida == 11:
             entregaNova = adiciona_entrega(g, "DFS")
             atribui_estafeta(entregaNova, estafetas_loaded)
             l = input("prima enter para continuar")
-            
         else:
             print("opcao invalida")
             l = input("prima enter para continuar")

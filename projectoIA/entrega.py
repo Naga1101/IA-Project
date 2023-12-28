@@ -80,7 +80,7 @@ def iniciarEntregasDFS(g, estafetas_loaded):
     caminho_final = []
     for estafeta in estafetas_loaded:
         distTotal = 0
-        atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
+        atual = 'Rua da Universidade'  # centro de distribuição
         #for entrega in estafeta.conjuntoEntregas:
         while estafeta.conjuntoEntregas:
             print(estafeta.nome)
@@ -105,7 +105,8 @@ def iniciarEntregasDFS(g, estafetas_loaded):
 def iniciarEntregasBFS(g, estafetas_loaded):
     caminho_final = []
     for estafeta in estafetas_loaded:
-        atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
+        distTotal = 0
+        atual = 'Rua da Universidade'  # centro de distribuição
         #for entrega in estafeta.conjuntoEntregas:
         while estafeta.conjuntoEntregas:
             entrega = estafeta.conjuntoEntregas[0]
@@ -116,16 +117,21 @@ def iniciarEntregasBFS(g, estafetas_loaded):
                 print(entrega.rua)
                 estafeta.conjuntoEntregas.pop(0)
             else:
-                caminho_final.append(res)
-                terminarEntrega2(entrega, estafeta)
+                caminho, dist = res
+                #print("Distância percorrida", dist)
+                distTotal += dist
+                caminho_final.append(caminho)
+                terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
+
+        print("O estafeta", estafeta.nome, "percorreu um total de", (distTotal / 10), "decâmetros")
 
     return caminho_final
 
 def iniciarEntregaGreedy(g, estafetas_loaded):
     caminho_final = []
     for estafeta in estafetas_loaded:
-        atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
+        atual = 'Rua da Universidade'  # centro de distribuição
         for entrega in estafeta.conjuntoEntregas:
             g.calculate_all_heuristics(atual, entrega.rua)
             print(atual, entrega.rua, "ATUAL / ENTREGA.RUA")
@@ -134,7 +140,7 @@ def iniciarEntregaGreedy(g, estafetas_loaded):
                 print("Não foi possivel realizar a entrega")
             else:
                 caminho_final.append(res)
-                terminarEntrega2(entrega, estafeta)
+                terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
 
     return caminho_final
@@ -142,7 +148,7 @@ def iniciarEntregaGreedy(g, estafetas_loaded):
 def iniciarEntregaAstar(g, estafetas_loaded):
     caminho_final = []
     for estafeta in estafetas_loaded:
-        atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
+        atual = 'Rua da Universidade'  # centro de distribuição
         for entrega in estafeta.conjuntoEntregas:
             g.calculate_all_heuristics(atual, entrega.rua)
             res = g.procura_aStar(atual, entrega.rua)
@@ -150,7 +156,7 @@ def iniciarEntregaAstar(g, estafetas_loaded):
                 print("Não foi possivel realizar a entrega")
             else:
                 caminho_final.append(res)
-                terminarEntrega2(entrega, estafeta)
+                terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
 
     return caminho_final
