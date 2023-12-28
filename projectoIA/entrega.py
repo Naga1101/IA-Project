@@ -36,7 +36,7 @@ def define_codigo():
     return codigoNovo
 
 
-def adiciona_entrega():
+def adiciona_entrega(g, algoritmo):
     print("Preencha as informações relativas à sua encomenda")
     eC = define_codigo()
     eR = input("Morada: ")
@@ -50,13 +50,21 @@ def adiciona_entrega():
     except ValueError as e:
         print(f"Error: {e}")
 
+    if algoritmo == 'DFS':
+        inicio = 'Travessa da Avenida de São Miguel'
+        res = g.procura_DFS(inicio, eR, path=[], visited=set())
+        caminho, dist = res
+        
     entregaNova = Entrega(eC, eR, eF, eV, eP, eD)
     print(entregaNova)
-    return entregaNova
+    return entregaNova, dist
 
 
-def terminarEntrega2(entrega, estafeta):  #### Feita e a funcionar
-    prazo_datetime = datetime.datetime.strptime(entrega.prazo, '%Y-%m-%d %Hh')
+def terminarEntrega(entrega, estafeta):  #### Feita e a funcionar
+    if isinstance(entrega.prazo, str):
+        prazo_datetime = datetime.datetime.strptime(entrega.prazo, '%Y-%m-%d %Hh')
+    else:
+        prazo_datetime = entrega.prazo
     if datetime.datetime.now() > prazo_datetime:
         estafeta.listaAvaliacoes.append(0)
         print("Entrega atrasada! Penalização no ranking.")
@@ -74,6 +82,7 @@ def iniciarEntregasDFS(g, estafetas_loaded):
         atual = 'Travessa da Avenida de São Miguel'  # centro de distribuição
         #for entrega in estafeta.conjuntoEntregas:
         while estafeta.conjuntoEntregas:
+            print(estafeta.nome)
             entrega = estafeta.conjuntoEntregas[0]
             # g.procuraDFS(atual, entrega.rua, path=[], visited=set())
             res = g.procura_DFS(atual, entrega.rua, path=[], visited=set())
@@ -82,8 +91,10 @@ def iniciarEntregasDFS(g, estafetas_loaded):
                 print(entrega.rua)
                 estafeta.conjuntoEntregas.pop(0)
             else:
-                caminho_final.append(res)
-                terminarEntrega2(entrega, estafeta)
+                caminho, dist = res
+                print("Distância percorrida", dist)
+                caminho_final.append(caminho)
+                terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
 
     return caminho_final

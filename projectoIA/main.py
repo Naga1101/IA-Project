@@ -49,8 +49,15 @@ def main():
             #inicio = input("Nodo inicial->")
             #fim = input("Nodo final->")
             #print(g.procura_DFS(inicio, fim, path=[], visited=set()))
-            path = iniciarEntregasDFS(g, estafetas_loaded)
-            print(path)
+            print("1-Realizar Entregas")
+            print("2-Adicionar Entrega")
+            inp = int(input("introduza a sua opcao-> "))
+            if inp == 1: 
+                path = iniciarEntregasDFS(g, estafetas_loaded)
+                print(path)
+            else:
+                entregaNova, dist = adiciona_entrega(g, "DFS")
+                atribui_estafeta(entregaNova, estafetas_loaded, dist)
             l = input("prima enter para continuar")
         elif saida == 6:
             #inicio = input("Nodo inicial->")
@@ -98,7 +105,7 @@ def main():
                         print(f"  {entrega_obj}")
                     print("\n")'''
         elif saida == 10:
-            entregaNova = adiciona_entrega()
+            entregaNova = adiciona_entrega(g, "DFS")
             atribui_estafeta(entregaNova, estafetas_loaded)
             l = input("prima enter para continuar")
             

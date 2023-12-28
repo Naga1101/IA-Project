@@ -124,20 +124,25 @@ class Graph:
     #     procura DFS
     ####################################################################################
 
-    def procura_DFS(self, start, end, path=[], visited=set()):
+    def procura_DFS(self, start, end, path=[], visited=set(), total_cost=0):
         path.append(start)
         visited.add(start)
 
         if start == end:
-            # calcular o custo do caminho funçao calcula custo.
-            custoT = self.calcula_custo(path)
-            return (path, custoT)
+            # Return the path and total cost
+            return path, total_cost
+
         for (adjacente, peso) in self.m_graph[start]:
             if adjacente not in visited:
-                resultado = self.procura_DFS(adjacente, end, path, visited)
+                # Accumulate the cost as you traverse
+                total_cost += peso
+                resultado = self.procura_DFS(adjacente, end, path, visited, total_cost)
                 if resultado is not None:
                     return resultado
-        path.pop()  # se nao encontra remover o que está no caminho......
+                # Backtrack: subtract the current edge cost when backtracking
+                total_cost -= peso
+
+        path.pop()  # Remove the current node if the path is not successful
         return None
 
     #####################################################

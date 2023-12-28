@@ -20,7 +20,7 @@ def getPrecoPorEntrega(self, entrega, estafeta):  # calcula o preço de uma entr
     return self.preco
 
 
-def atribui_estafeta(entrega, estafetas_loaded, distancia=40):  ## distancia 40 por enquanto
+def atribui_estafeta(entrega, estafetas_loaded, distancia):  ## distancia 40 por enquanto
     estafeta_mais_rapido = None
     maiorVelocidade = 0
     for estafeta in estafetas_loaded:
@@ -68,21 +68,6 @@ def calculaSpeedConsoantePeso(entrega, estafeta, distancia):  # calcula velocida
     else:
         print("Excede o peso maximo do estafeta", estafeta.nome)
         return -1
-
-
-### Terminar Encomenda
-def terminarEntrega(entrega, estafeta):  #### Feita e a funcionar
-    prazo_datetime = datetime.datetime.strptime(entrega.prazo, '%Y-%m-%d %Hh')
-    if datetime.datetime.now() > prazo_datetime:
-        estafeta.listaAvaliacoes.append(0)
-        print("Entrega atrasada! Penalização no ranking.")
-    else:
-        avaliacaoDoCliente = input("Como avalia a sua experiência? ")
-        print("")
-        estafeta.listaAvaliacoes.append(int(avaliacaoDoCliente))
-    estafeta.remove_entrega(entrega)
-    estafeta.atualiza_ranking()
-
 
 def fazEntregas(self, estafeta, metodoProcura):  # sabendo o metodo, vai percorrendo a lista de entregas, calcula a melhor rota para cada uma e fá-la, até chegar ao fim.
     while estafeta.conjuntoEntregas != None:
