@@ -129,15 +129,17 @@ def iniciarEntregasBFS(g, estafetas_loaded):
     return caminho_final
 
 def iniciarEntregaGreedy(g, estafetas_loaded):
+    # METER ISTO COM WHILE PORQUE SENAO SO FAZ UMA
     caminho_final = []
     for estafeta in estafetas_loaded:
         atual = 'Rua da Universidade'  # centro de distribuição
-        for entrega in estafeta.conjuntoEntregas:
+        while estafeta.conjuntoEntregas:
+            entrega = estafeta.conjuntoEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
-            print(atual, entrega.rua, "ATUAL / ENTREGA.RUA")
             res = g.greedy(atual, entrega.rua)
             if res is None:
                 print("Não foi possivel realizar a entrega")
+                estafeta.conjuntoEntregas.pop(0)
             else:
                 caminho_final.append(res)
                 terminarEntrega(entrega, estafeta)
@@ -149,11 +151,14 @@ def iniciarEntregaAstar(g, estafetas_loaded):
     caminho_final = []
     for estafeta in estafetas_loaded:
         atual = 'Rua da Universidade'  # centro de distribuição
-        for entrega in estafeta.conjuntoEntregas:
+        while estafeta.conjuntoEntregas:
+            entrega = estafeta.conjuntoEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
             res = g.procura_aStar(atual, entrega.rua)
+            print(estafeta.nome)
             if res is None:
                 print("Não foi possivel realizar a entrega")
+                estafeta.conjuntoEntregas.pop(0)
             else:
                 caminho_final.append(res)
                 terminarEntrega(entrega, estafeta)
