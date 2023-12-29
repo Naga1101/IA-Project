@@ -8,9 +8,9 @@ dataAtual = datetime.datetime.now()
 
 # meioTransporte
 meioTransportes = {
-    'bicicleta': (5, 10),
-    'mota': (20, 35),
-    'carro': (100, 50)
+    'bicicleta': (5, 10, 0),
+    'mota': (20, 35, 1),
+    'carro': (100, 50, 2)
 }
 
 
@@ -24,6 +24,8 @@ class estafeta:
         self.meioTransporte = meioTransporte
         self.localizacao = localizacao
 
+    def setPesoAtual(self, pesoAtual):
+        self.pesoAtual = pesoAtual
     def total_peso_entregas(self):
         total_peso = sum(entrega.peso for entrega in self.conjuntoEntregas)
         return total_peso
