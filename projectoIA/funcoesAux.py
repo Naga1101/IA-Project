@@ -1,7 +1,7 @@
 import datetime
 
 from entrega import Entrega
-from estafeta import estafeta
+from estafeta import *
 from entrega import *
 from Grafo import *
 from Nodo import *
@@ -24,15 +24,25 @@ def getPrecoPorEntrega(self, entrega, estafeta):  # calcula o preço de uma entr
 def atribui_estafeta(entrega, estafetas_loaded, distancia):  ## distancia 40 por enquanto
     estafeta_mais_rapido = None
     maiorVelocidade = 0
+    pegadaEcológica = 3
     for estafeta in estafetas_loaded:
-        velocidade = calculaSpeedConsoantePeso(entrega, estafeta, distancia)
-        if velocidade > maiorVelocidade or estafeta_mais_rapido == None:
-            maiorVelocidade = velocidade
-            estafeta_mais_rapido = estafeta
-    print(f"Nome: {estafeta_mais_rapido.nome}")
-    estafeta_mais_rapido.conjuntoEntregas.append(entrega)
-    for entrega_obj in estafeta_mais_rapido.conjuntoEntregas:
-        print(f"  {entrega_obj}")
+        veiculo = estafeta.meioTransporte
+        _, _ , custoEcol = meioTransportes[veiculo]
+        if custoEcol < pegadaEcológica:
+            velocidade = calculaSpeedConsoantePeso(entrega, estafeta, distancia)
+            if velocidade > 0:
+                if velocidade > maiorVelocidade or estafeta_mais_rapido == None or custoEcol < pegadaEcológica:
+                    maiorVelocidade = velocidade
+                    estafeta_mais_rapido = estafeta
+                    pegadaEcológica = custoEcol
+
+    if estafeta_mais_rapido != None:
+        print(f"Nome: {estafeta_mais_rapido.nome} | Veiculo: {estafeta_mais_rapido.meioTransporte}")
+        estafeta_mais_rapido.conjuntoEntregas.append(entrega)
+        for entrega_obj in estafeta_mais_rapido.conjuntoEntregas:
+            print(f"  {entrega_obj}")
+    else:
+        print("Encomenda não chega dentro do prazo pretendido em nenhum estafeta!")
 
 
 def poeEmHoras(prazo):  # calcula em horas o tempo limite para a entrega
@@ -45,16 +55,16 @@ def chega_a_tempo(prazo, velocidade, distancia,
     tempoChegar = distancia / velocidade
 
     if tempoChegar < tempoLimite:
-        print("A entrega chega dentro do prazo com o estafeta", estafeta.nome)
+        print("A entrega chega dentro do prazo com o estafeta", estafeta.nome, "e veículo", estafeta.meioTransporte)
         return velocidade
 
-    print("A entrega não chega a tempo com o estafeta", estafeta.nome)
+    print("A entrega não chega a tempo com o estafeta", estafeta.nome, "e veículo", estafeta.meioTransporte)
     return -1
 
 
 def calculaSpeedConsoantePeso(entrega, estafeta, distancia):  # calcula velocidade em km\h
     veiculo = estafeta.meioTransporte
-    pesoMax, velocidadeMax = meioTransportes[veiculo]
+    pesoMax, velocidadeMax, _ = meioTransportes[veiculo]
     soma = estafeta.pesoAtual + int(entrega.peso)
     if soma < pesoMax:
         if veiculo == 'bicicleta':

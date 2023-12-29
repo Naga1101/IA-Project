@@ -73,6 +73,7 @@ def terminarEntrega(entrega, estafeta):  #### Feita e a funcionar
         print("")
         estafeta.listaAvaliacoes.append(int(avaliacaoDoCliente))
     estafeta.remove_entrega(entrega)
+    estafeta.setPesoAtual(0)
     estafeta.atualiza_ranking()
 
 
