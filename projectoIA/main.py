@@ -7,9 +7,6 @@ import osmnx as ox
 def main():
     data_filename = 'Dados.json'  # Replace with your actual file name
     estafetas_loaded = load_Estafetas(data_filename)
-    
-    # entregaTeste1 = Entrega(127, 'rua Rui Tijjy', 'Cepoes', 4, 9, '2023-8-16 17h')
-    # entregaTeste2 = Entrega(898, 'rua do moina', 'Barrio', 26, 33, '2024-3-30 16h')
 
     g = Graph()
     g.parse_file('teste.csv')
@@ -98,18 +95,9 @@ def main():
                 if reply == "sim":
                     g.desenha()
                 print("\n")
-                '''if estafeta_obj.nome == "Luis":
-                    terminarEntrega(entregaTeste1, estafeta_obj)
-                    terminarEntrega(entregaTeste2, estafeta_obj)
-                    print(f"Ranking: {estafeta_obj.listaAvaliacoes} e {estafeta_obj.ranking}")
-                    if estafeta_obj.conjuntoEntregas == []:
-                        print("Foram concluidas todas as entregas")
-                    for entrega_obj in estafeta_obj.conjuntoEntregas:
-                        print(f"  {entrega_obj}")
-                    print("\n")'''
         elif saida == 11:
-            entregaNova = adiciona_entrega(g, "DFS")
-            atribui_estafeta(entregaNova, estafetas_loaded)
+            entregaNova, dist = adiciona_entrega(g, "DFS")
+            atribui_estafeta(entregaNova, estafetas_loaded, dist)
             l = input("prima enter para continuar")
         else:
             print("opcao invalida")

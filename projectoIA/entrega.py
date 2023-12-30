@@ -1,9 +1,11 @@
 import datetime
+import math
+import random
+
 from funcoesAux import *
-from Grafo import Graph
+from Grafo import *
 from Grafo import *
 from Nodo import *
-import random
 
 codigosIndisponiveis = [123, 929, 100, 99, 1, 237, 127, 898, 567, 23, 58, 7]
 
@@ -76,6 +78,25 @@ def terminarEntrega(entrega, estafeta):  #### Feita e a funcionar
     estafeta.setPesoAtual(0)
     estafeta.atualiza_ranking()
 
+def organizaLista(g, partida, listaEntregas): # coloca em primeiro da lista a encomenda mais próxima de onde o estafeta se encontra
+    posLista = 0
+    posProx = 0
+    maisProx = None
+    distProx = -1
+    coordPart = g.get_node_by_name(partida).getCoord()
+    for entrega in listaEntregas:
+        coordEntr = g.get_node_by_name(entrega.rua).getCoord()
+        dist = int(round(math.sqrt((coordEntr[1] - coordPart[1]) ** 2 + (coordEntr[0] - coordPart[0]) ** 2)))
+        if distProx < 0 or dist < distProx:
+            distProx = dist
+            maisProx = entrega
+            posProx = posLista  # no caso de ser o primeiro diz que a posição é 0
+        posLista += 1
+        aux = listaEntregas[0]
+        listaEntregas[0] = maisProx
+        listaEntregas[posProx] = aux
+    return listaEntregas
+
 
 def iniciarEntregasDFS(g, estafetas_loaded):
     caminho_final = []
@@ -135,11 +156,13 @@ def iniciarEntregaGreedy(g, estafetas_loaded):
     for estafeta in estafetas_loaded:
         atual = 'Rua da Universidade'  # centro de distribuição
         while estafeta.conjuntoEntregas:
-            entrega = estafeta.conjuntoEntregas[0]
+            listaEntregas = organizaLista(g, atual, estafeta.conjuntoEntregas)
+            entrega = listaEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
             res = g.greedy(atual, entrega.rua)
             if res is None:
                 print("Não foi possivel realizar a entrega")
+                estafeta.conjuntoEntregas = listaEntregas
                 estafeta.conjuntoEntregas.pop(0)
             else:
                 caminho_final.append(res)
@@ -153,12 +176,17 @@ def iniciarEntregaAstar(g, estafetas_loaded):
     for estafeta in estafetas_loaded:
         atual = 'Rua da Universidade'  # centro de distribuição
         while estafeta.conjuntoEntregas:
-            entrega = estafeta.conjuntoEntregas[0]
+            #print(estafeta.conjuntoEntregas)
+            listaEntregas = organizaLista(g, atual, estafeta.conjuntoEntregas)
+            #print(listaEntregas)
+            entrega = listaEntregas[0]
+            # entrega = estafeta.conjuntoEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
             res = g.procura_aStar(atual, entrega.rua)
             print(estafeta.nome)
             if res is None:
                 print("Não foi possivel realizar a entrega")
+                estafeta.conjuntoEntregas = listaEntregas
                 estafeta.conjuntoEntregas.pop(0)
             else:
                 caminho_final.append(res)
