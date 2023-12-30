@@ -7,7 +7,7 @@ from Grafo import *
 from Grafo import *
 from Nodo import *
 
-codigosIndisponiveis = [123, 929, 100, 99, 1, 237, 127, 898, 567, 23, 58, 7]
+codigosIndisponiveis = [123, 929, 100, 99, 1, 237, 127, 898, 567, 23, 58, 7, 696, 604, 603, 400]
 
 
 class Entrega:
