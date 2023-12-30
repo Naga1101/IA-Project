@@ -50,36 +50,59 @@ def main():
             print("1-Realizar Entregas")
             print("2-Adicionar Entrega")
             inp = int(input("introduza a sua opcao-> "))
-            if inp == 1: 
-                path = iniciarEntregasDFS(g, estafetas_loaded)
-                print(path)
+            if inp == 1:
+                path, total_path = iniciarEntregasDFS(g, estafetas_loaded)
+
+                printPaths(path)
+                opcao = input("Pretende ver o caminho percorrido pelo algoritmo? S/N\n")
+                if opcao == "S":
+                    printPathsTotal(total_path)
             else:
                 entregaNova, dist = adiciona_entrega(g, "DFS")
                 atribui_estafeta(entregaNova, estafetas_loaded, dist)
             l = input("prima enter para continuar")
+
         elif saida == 6:
-            #inicio = input("Nodo inicial->")
-            #fim = input("Nodo final->")
-            #print(g.procura_BFS(inicio, fim))
-            path = iniciarEntregasBFS(g, estafetas_loaded)
-            print(path)
+            path, total_path = iniciarEntregasBFS(g, estafetas_loaded)
+
+            printPaths(path)
+            opcao = input("Pretende ver o caminho percorrido pelo algoritmo? S/N\n")
+            if opcao == "S":
+                printPathsTotal(total_path)
             l = input("prima enter para continuar")
+
         elif saida == 7:
-            #inicio = input("Nodo inicial->")
-            #fim = input("Nodo final->")
-            #print(g.procura_aStar(inicio, fim))
-            path = iniciarEntregaAstar(g, estafetas_loaded)
-            print(path)
+            path, total_path = iniciarEntregaAstar(g, estafetas_loaded)
+            printPaths(path)
+            opcao = input("Pretende ver o caminho percorrido pelo algoritmo? S/N\n")
+            if opcao == "S":
+                printPathsTotal(total_path)
+
+            #path = iniciarEntregaAstar(g, estafetas_loaded)
+            #print(path)
             l = input("prima enter para continuar")
+
         elif saida == 8:
-            # inicio = input("Nodo inicial->")
-            # fim = input("Nodo final->")
-            # print(g.greedy(inicio, fim))
-            path = iniciarEntregaGreedy(g, estafetas_loaded)
-            print(path)
+            path, total_path = iniciarEntregaGreedy(g, estafetas_loaded)
+            printPaths(path)
+            opcao = input("Pretende ver o caminho percorrido pelo algoritmo? S/N\n")
+            if opcao == "S":
+                printPathsTotal(total_path)
             l = input("prima enter para continuar")
+
         elif saida == 9:
-            compareAlgorithms(g, estafetas_loaded)
+            DFS_Path, BFS_Path, Greedy_path, aStar_path = compareAlgorithms(g, estafetas_loaded)
+            opcao = input("Pretende ver o caminho obtido pelos algoritmos? S/N\n")
+            if opcao == "S":
+                print("Caminho obtido pelo algoritmo DFS")
+                printPathsTotal(DFS_Path)
+                print("Caminho obtido pelo algoritmo BFS")
+                printPathsTotal(BFS_Path)
+                print("Caminho obtido pelo algoritmo Greedy")
+                printPathsTotal(Greedy_path)
+                print("Caminho obtido pelo algoritmo aStar")
+                printPathsTotal(aStar_path)
+
         elif saida == 10:
             for estafeta_obj in estafetas_loaded:
                 print(f"Nome: {estafeta_obj.nome}")

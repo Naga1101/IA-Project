@@ -80,32 +80,6 @@ def calculaSpeedConsoantePeso(entrega, estafeta, distancia):  # calcula velocida
         print("Excede o peso maximo do estafeta", estafeta.nome)
         return -1
 
-
-def fazEntregas(self, estafeta,
-                metodoProcura):  # sabendo o metodo, vai percorrendo a lista de entregas, calcula a melhor rota para cada uma e fá-la, até chegar ao fim.
-    while estafeta.conjuntoEntregas != None:
-        if metodoProcura == 'DFS':
-            x = self.procura_DFS(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua, path=[], visited=set())
-            print(x)
-            estafeta.localizacao = Entrega.first.rua
-            terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
-        elif metodoProcura == 'BFS':
-            x = self.procura_BFS(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua, path=[], visited=set())
-            print(x)
-            estafeta.localizacao = Entrega.first.rua
-            terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
-        elif metodoProcura == 'A*':
-            x = self.procura_aStar(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua)
-            print(x)
-            estafeta.localizacao = Entrega.first.rua
-            terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
-        elif metodoProcura == 'greedy':
-            x = self.greedy(estafeta.localizacao, estafeta.conjuntoEntregas.first.rua)
-            print(x)
-            estafeta.localizacao = Entrega.first.rua
-            terminarEntrega(estafeta.conjuntoEntregas.first, estafeta)
-
-
 def listarRanking(listaEstafetas):
     sorted_list = sorted(listaEstafetas, key=lambda x: x.ranking, reverse=True)
     i = 0
@@ -119,13 +93,19 @@ def copy_estafeta(estafeta):
 
 def compareAlgorithms(g, listaEstafetas):
     DFS_results = {}
+    DFS_path = {}
     BFS_results = {}
+    BFS_path = {}
     Greedy_results = {}
+    Greedy_path = {}
     aStar_results = {}
+    aStar_path = {}
     for estafeta in listaEstafetas:
         distDFS = 0
         atual = 'Rua da Universidade'  # centro de distribuição
         entregas_DFS = estafeta.conjuntoEntregas.copy()
+        caminho_estafeta = []
+
         while entregas_DFS:
             entrega = entregas_DFS[0]
             res = g.procura_DFS(atual, entrega.rua, path=[], visited=set())
@@ -133,70 +113,105 @@ def compareAlgorithms(g, listaEstafetas):
             if res is None:
                 entregas_DFS.pop(0)
             else:
-                caminho, dist = res
+                caminho, dist, resto = res
                 distDFS += dist
                 atual = entrega.rua
+                caminho_estafeta.append(caminho)
                 entregas_DFS.pop(0)
 
         DFS_results[estafeta.nome] = distDFS / 10
-    print(DFS_results)
+        DFS_path[estafeta.nome] = caminho_estafeta
+    print("DFS Results:", DFS_results)
 
     for estafeta in listaEstafetas:
         distBFS = 0
         atual = 'Rua da Universidade'  # centro de distribuição
         entregas_BFS = estafeta.conjuntoEntregas.copy()
+        caminho_estafeta = []
         while entregas_BFS:
             entrega = entregas_BFS[0]
             res = g.procura_BFS(atual, entrega.rua)
             if res is None:
                 entregas_BFS.pop(0)
             else:
-                caminho, dist = res
+                caminho, dist, _ = res
                 distBFS += dist
                 atual = entrega.rua
+                caminho_estafeta.append(caminho)
                 entregas_BFS.pop(0)
 
+        BFS_path[estafeta.nome] = caminho_estafeta
         BFS_results[estafeta.nome] = distBFS / 10
 
-    print(BFS_results)
+    print("BFS Results:", BFS_results)
 
     for estafeta in listaEstafetas:
         dist_greedy = 0
         atual = 'Rua da Universidade'  # centro de distribuição
         estafeta_Greedy = copy_estafeta(estafeta)
-        for entrega in estafeta_Greedy.conjuntoEntregas:
+        caminho_estafeta = []
+        while estafeta_Greedy.conjuntoEntregas:
+            listaEntregas = organizaLista(g, atual, estafeta_Greedy.conjuntoEntregas)
+            entrega = listaEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
             res = g.greedy(atual, entrega.rua)
             if res is None:
                 pass
                 # print("Não foi possivel realizar a entrega")
             else:
-                _, dist = res
+                caminho, dist, _ = res
                 # terminarEntrega(entrega, estafeta)
                 dist_greedy += dist
                 atual = entrega.rua
+                caminho_estafeta.append(caminho)
                 estafeta_Greedy.remove_entrega(entrega)
-
+        Greedy_path[estafeta.nome] = caminho_estafeta
         Greedy_results[estafeta.nome] = dist_greedy / 10
 
-    print(Greedy_results)
+    print("Greedy Results:", Greedy_results)
 
     for estafeta in listaEstafetas:
         dist_aStar = 0
         atual = 'Rua da Universidade'  # centro de distribuição
         estafeta_aStar = copy_estafeta(estafeta)
-        for entrega in estafeta_aStar.conjuntoEntregas:
+        caminho_estafeta = []
+        while estafeta_aStar.conjuntoEntregas:
+            listaEntregas = organizaLista(g, atual, estafeta_aStar.conjuntoEntregas)
+            entrega = listaEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
             res = g.procura_aStar(atual, entrega.rua)
             if res is None:
                 pass
                 # print("Não foi possivel realizar a entrega")
             else:
-                _, dist = res
+                caminho, dist, _ = res
                 dist_aStar += dist
                 atual = entrega.rua
+                caminho_estafeta.append(caminho)
                 estafeta_aStar.remove_entrega(entrega)
-
+        aStar_path[estafeta.nome] = caminho_estafeta
         aStar_results[estafeta.nome] = dist_aStar / 10
 
-    print(aStar_results)
+    print("aStar Results:", aStar_results)
+
+    return DFS_path, BFS_path, Greedy_path, aStar_path
+
+
+def printPaths(caminho_final):
+    for estafeta, paths in caminho_final.items():
+        print(f"Estafeta: {estafeta}")
+        custo_total = 0
+
+        for n_entrega, (caminho, custo) in enumerate(paths, start=1):
+            custo_total += custo
+            print(f"Caminho para entrega {n_entrega}: {caminho} - Custo: {custo/10}")
+
+        print(f"Distancia percorrida por {estafeta}: {custo_total / 10}\n")
+
+def printPathsTotal(caminho_final):
+    for estafeta, paths in caminho_final.items():
+        print(f"Estafeta: {estafeta}")
+
+        for n_entrega, caminho in enumerate(paths, start=1):
+            print(f"Caminho para entrega {n_entrega}: {caminho}")
+        print()

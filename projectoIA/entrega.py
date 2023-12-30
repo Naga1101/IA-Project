@@ -9,7 +9,6 @@ from Nodo import *
 
 codigosIndisponiveis = [123, 929, 100, 99, 1, 237, 127, 898, 567, 23, 58, 7, 696, 604, 603, 400]
 
-
 class Entrega:
     def __init__(self, codigo, rua, freguesia, volume, peso, prazo):
         self.codigo = codigo
@@ -99,82 +98,116 @@ def organizaLista(g, partida, listaEntregas): # coloca em primeiro da lista a en
 
 
 def iniciarEntregasDFS(g, estafetas_loaded):
-    caminho_final = []
+    caminho_final = {}
+
+    perc_algoritmo = {}
     for estafeta in estafetas_loaded:
         distTotal = 0
         atual = 'Rua da Universidade'  # centro de distribuição
-        #for entrega in estafeta.conjuntoEntregas:
+
+        caminho_estafeta = []
+        path_algoritmo = []
+
         while estafeta.conjuntoEntregas:
             print(estafeta.nome)
             entrega = estafeta.conjuntoEntregas[0]
-            res = g.procura_DFS(atual, entrega.rua, path=[], visited=set())
-            if res is None:
+            path, custo, total_path = g.procura_DFS(atual, entrega.rua, path=[], visited=set())
+            path_algoritmo.append(total_path)
+
+            if (path, custo) is None:
                 print("Não foi possivel realizar a entrega")
                 print(entrega.rua)
                 estafeta.conjuntoEntregas.pop(0)
             else:
-                caminho, dist = res
-                #print("Distância percorrida", dist)
+                caminho, dist = (path, custo)
+                total = (path, custo)
                 distTotal += dist
-                caminho_final.append(caminho)
+                caminho_estafeta.append(total)
                 terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
-        
+
+        perc_algoritmo[estafeta.nome] = path_algoritmo
+        caminho_final[estafeta.nome] = caminho_estafeta
+
         print("O estafeta", estafeta.nome, "percorreu um total de", (distTotal/10), "decâmetros")
 
-    return caminho_final
+    return caminho_final, perc_algoritmo
 
 def iniciarEntregasBFS(g, estafetas_loaded):
-    caminho_final = []
+    caminho_final = {}
+
+    perc_algoritmo = {}
     for estafeta in estafetas_loaded:
         distTotal = 0
         atual = 'Rua da Universidade'  # centro de distribuição
         #for entrega in estafeta.conjuntoEntregas:
+        caminho_estafeta = []
+        path_algoritmo = []
         while estafeta.conjuntoEntregas:
             entrega = estafeta.conjuntoEntregas[0]
             # g.procuraDFS(atual, entrega.rua, path=[], visited=set())
-            res = g.procura_BFS(atual, entrega.rua)
-            if res is None:
+            path, custo, total_path = g.procura_BFS(atual, entrega.rua)
+            path_algoritmo.append(total_path)
+            if (path, custo) is None:
                 print("Não foi possivel realizar a entrega")
                 print(entrega.rua)
                 estafeta.conjuntoEntregas.pop(0)
             else:
-                caminho, dist = res
+                caminho, dist = (path, custo)
+                total = (path, custo)
                 #print("Distância percorrida", dist)
                 distTotal += dist
-                caminho_final.append(caminho)
+                caminho_estafeta.append(total)
                 terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
 
+        perc_algoritmo[estafeta.nome] = path_algoritmo
+        caminho_final[estafeta.nome] = caminho_estafeta
+
         print("O estafeta", estafeta.nome, "percorreu um total de", (distTotal / 10), "decâmetros")
 
-    return caminho_final
+    return caminho_final, perc_algoritmo
 
 def iniciarEntregaGreedy(g, estafetas_loaded):
-    # METER ISTO COM WHILE PORQUE SENAO SO FAZ UMA
-    caminho_final = []
+    caminho_final = {}
+    perc_algoritmo = {}
+
     for estafeta in estafetas_loaded:
         atual = 'Rua da Universidade'  # centro de distribuição
+        caminho_estafeta = []
+        path_algoritmo = []
+
         while estafeta.conjuntoEntregas:
             listaEntregas = organizaLista(g, atual, estafeta.conjuntoEntregas)
             entrega = listaEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
-            res = g.greedy(atual, entrega.rua)
-            if res is None:
+            path, custo, total_path = g.greedy(atual, entrega.rua)
+            path_algoritmo.append(total_path)
+
+            if (path, custo) is None:
                 print("Não foi possivel realizar a entrega")
                 estafeta.conjuntoEntregas = listaEntregas
                 estafeta.conjuntoEntregas.pop(0)
             else:
-                caminho_final.append(res)
+                total = (path, custo)
+                caminho_estafeta.append(total)
                 terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
 
-    return caminho_final
+        perc_algoritmo[estafeta.nome] = path_algoritmo
+        caminho_final[estafeta.nome] = caminho_estafeta
+
+    return caminho_final, perc_algoritmo
 
 def iniciarEntregaAstar(g, estafetas_loaded):
-    caminho_final = []
+    caminho_final = {}
+    perc_algoritmo = {}
+
     for estafeta in estafetas_loaded:
         atual = 'Rua da Universidade'  # centro de distribuição
+        caminho_estafeta = []
+        path_algoritmo = []
+
         while estafeta.conjuntoEntregas:
             #print(estafeta.conjuntoEntregas)
             listaEntregas = organizaLista(g, atual, estafeta.conjuntoEntregas)
@@ -182,15 +215,20 @@ def iniciarEntregaAstar(g, estafetas_loaded):
             entrega = listaEntregas[0]
             # entrega = estafeta.conjuntoEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
-            res = g.procura_aStar(atual, entrega.rua)
-            print(estafeta.nome)
-            if res is None:
+            path, custo, total_path = g.procura_aStar(atual, entrega.rua)
+            path_algoritmo.append(total_path)
+
+            if (path, custo) is None:
                 print("Não foi possivel realizar a entrega")
                 estafeta.conjuntoEntregas = listaEntregas
                 estafeta.conjuntoEntregas.pop(0)
             else:
-                caminho_final.append(res)
+                total = (path, custo)
+                caminho_estafeta.append(total)
                 terminarEntrega(entrega, estafeta)
                 atual = entrega.rua
 
-    return caminho_final
+        perc_algoritmo[estafeta.nome] = path_algoritmo
+        caminho_final[estafeta.nome] = caminho_estafeta
+
+    return caminho_final, perc_algoritmo

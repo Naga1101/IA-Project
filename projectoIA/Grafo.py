@@ -130,7 +130,7 @@ class Graph:
 
         if start == end:
             # Return the path and total cost
-            return path, total_cost
+            return path, total_cost, list(visited)
 
         for (adjacente, peso) in self.m_graph[start]:
             if adjacente not in visited:
@@ -163,8 +163,10 @@ class Graph:
         parent[start] = None
 
         path_found = False
+        caminho_percorrido = []
         while not fila.empty() and path_found == False:
             nodo_atual = fila.get()
+            caminho_percorrido.append(nodo_atual)
             if nodo_atual == end:
                 path_found = True
             else:
@@ -187,7 +189,7 @@ class Graph:
             custo = self.calcula_custo(path)
         else:
             return None
-        return path, custo
+        return path, custo, caminho_percorrido
 
     ###########################
     # desenha grafo  modo grafico
@@ -281,6 +283,8 @@ class Graph:
         open_list = {start}
         closed_list = set([])
 
+        percorrido = []
+
         g = {}
         g[start] = 0
 
@@ -313,9 +317,12 @@ class Graph:
                     n = parents[n]
                 reconst_path.append(start)
                 reconst_path.reverse()
-                #print('Optimal Path found:', reconst_path)
-                #print('Total Cost:', self.calcula_custo(reconst_path))
-                return reconst_path, self.calcula_custo(reconst_path)
+
+                percorrido.extend(reconst_path)
+                # print('Optimal Path found:', reconst_path)
+                # print('Total Cost:', self.calcula_custo(reconst_path))
+
+                return reconst_path, self.calcula_custo(reconst_path), percorrido
 
             for (m, weight) in self.getNeighbours(n):
                 if m not in open_list and m not in closed_list:
@@ -332,6 +339,7 @@ class Graph:
 
             open_list.remove(n)
             closed_list.add(n)
+            percorrido.append(n)
 
         print('Path does not exist!')
         return None
@@ -469,7 +477,7 @@ class Graph:
 
                 reconst_path.reverse()
 
-                return (reconst_path, self.calcula_custo(reconst_path))
+                return reconst_path, self.calcula_custo(reconst_path), list(closed_list)
             # para todos os vizinhos  do nodo corrente
 
             for (m, weight) in self.getNeighbours(n):
