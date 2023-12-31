@@ -6,7 +6,6 @@ import copy
 
 dataAtual = datetime.datetime.now()
 
-# meioTransporte
 meioTransportes = {
     'bicicleta': (5, 10, 0),
     'mota': (20, 35, 1),
@@ -26,6 +25,7 @@ class estafeta:
 
     def setPesoAtual(self, pesoAtual):
         self.pesoAtual = pesoAtual
+
     def total_peso_entregas(self):
         total_peso = sum(entrega.peso for entrega in self.conjuntoEntregas)
         return total_peso
@@ -72,7 +72,6 @@ def calcula_heuristica_entregas(estafeta, grafo):
 
             heuristica = grafo.calcula_heuristica(node_name, destino)
 
-            # Add heuristic to the dictionary
             heuristics[(node_name, destino)] = heuristica
 
             coord = node.getCoord()

@@ -1,13 +1,10 @@
-import datetime
-import math
 import random
 
 from funcoesAux import *
 from Grafo import *
-from Grafo import *
-from Nodo import *
 
 codigosIndisponiveis = [123, 929, 100, 99, 1, 237, 127, 898, 567, 23, 58, 7, 696, 604, 603, 400]
+
 
 class Entrega:
     def __init__(self, codigo, rua, freguesia, volume, peso, prazo):
@@ -55,13 +52,22 @@ def adiciona_entrega(g, algoritmo):
         inicio = 'Travessa da Avenida de São Miguel'
         res = g.procura_DFS(inicio, eR, path=[], visited=set())
         caminho, dist = res
-        
+
     entregaNova = Entrega(eC, eR, eF, eV, eP, eD)
     print(entregaNova)
     return entregaNova, dist
 
 
-def terminarEntrega(entrega, estafeta):  #### Feita e a funcionar
+def getPrecoPorEntrega(self, entrega, estafeta):  # calcula o preço de uma entrega
+    if entrega is not None and estafeta is not None:
+        self.preco = (entrega.volume * 0.2) + (entrega.peso * 0.3) + (poeEmHoras(entrega.prazo) / 0.3)
+        if estafeta.meioTransporte == 'carro': self.preco * 1.5
+        if estafeta.meioTransporte == 'mota': self.preco * 1.3
+        if estafeta.meioTransporte == 'bicicleta': self.preco * 1.1
+    return self.preco
+
+
+def terminarEntrega(entrega, estafeta):
     if isinstance(entrega.prazo, str):
         prazo_datetime = datetime.datetime.strptime(entrega.prazo, '%Y-%m-%d %Hh')
     else:
@@ -77,7 +83,9 @@ def terminarEntrega(entrega, estafeta):  #### Feita e a funcionar
     estafeta.setPesoAtual(0)
     estafeta.atualiza_ranking()
 
-def organizaLista(g, partida, listaEntregas): # coloca em primeiro da lista a encomenda mais próxima de onde o estafeta se encontra
+
+def organizaLista(g, partida,
+                 listaEntregas):  # coloca em primeiro da lista a encomenda mais próxima de onde o estafeta se encontra
     posLista = 0
     posProx = 0
     maisProx = None
@@ -129,9 +137,10 @@ def iniciarEntregasDFS(g, estafetas_loaded):
         perc_algoritmo[estafeta.nome] = path_algoritmo
         caminho_final[estafeta.nome] = caminho_estafeta
 
-        print("O estafeta", estafeta.nome, "percorreu um total de", (distTotal/10), "decâmetros")
+        print("O estafeta", estafeta.nome, "percorreu um total de", (distTotal / 10), "decâmetros")
 
     return caminho_final, perc_algoritmo
+
 
 def iniciarEntregasBFS(g, estafetas_loaded):
     caminho_final = {}
@@ -140,7 +149,7 @@ def iniciarEntregasBFS(g, estafetas_loaded):
     for estafeta in estafetas_loaded:
         distTotal = 0
         atual = 'Rua da Universidade'  # centro de distribuição
-        #for entrega in estafeta.conjuntoEntregas:
+        # for entrega in estafeta.conjuntoEntregas:
         caminho_estafeta = []
         path_algoritmo = []
         while estafeta.conjuntoEntregas:
@@ -155,7 +164,6 @@ def iniciarEntregasBFS(g, estafetas_loaded):
             else:
                 caminho, dist = (path, custo)
                 total = (path, custo)
-                #print("Distância percorrida", dist)
                 distTotal += dist
                 caminho_estafeta.append(total)
                 terminarEntrega(entrega, estafeta)
@@ -167,6 +175,7 @@ def iniciarEntregasBFS(g, estafetas_loaded):
         print("O estafeta", estafeta.nome, "percorreu um total de", (distTotal / 10), "decâmetros")
 
     return caminho_final, perc_algoritmo
+
 
 def iniciarEntregaGreedy(g, estafetas_loaded):
     caminho_final = {}
@@ -199,6 +208,7 @@ def iniciarEntregaGreedy(g, estafetas_loaded):
 
     return caminho_final, perc_algoritmo
 
+
 def iniciarEntregaAstar(g, estafetas_loaded):
     caminho_final = {}
     perc_algoritmo = {}
@@ -209,9 +219,7 @@ def iniciarEntregaAstar(g, estafetas_loaded):
         path_algoritmo = []
 
         while estafeta.conjuntoEntregas:
-            #print(estafeta.conjuntoEntregas)
             listaEntregas = organizaLista(g, atual, estafeta.conjuntoEntregas)
-            #print(listaEntregas)
             entrega = listaEntregas[0]
             # entrega = estafeta.conjuntoEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)

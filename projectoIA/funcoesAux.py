@@ -10,24 +10,13 @@ import copy
 dataAtual = datetime.datetime.now()
 
 
-## Adicionar encomenda
-
-def getPrecoPorEntrega(self, entrega, estafeta):  # calcula o preço de uma entrega
-    if entrega is not None and estafeta is not None:
-        self.preco = (entrega.volume * 0.2) + (entrega.peso * 0.3) + (poeEmHoras(entrega.prazo) / 0.3)
-        if estafeta.meioTransporte == 'carro': self.preco * 1.5
-        if estafeta.meioTransporte == 'mota': self.preco * 1.3
-        if estafeta.meioTransporte == 'bicicleta': self.preco * 1.1
-    return self.preco
-
-
 def atribui_estafeta(entrega, estafetas_loaded, distancia):  ## distancia 40 por enquanto
     estafeta_mais_rapido = None
     maiorVelocidade = 0
     pegadaEcológica = 3
     for estafeta in estafetas_loaded:
         veiculo = estafeta.meioTransporte
-        _, _ , custoEcol = meioTransportes[veiculo]
+        _, _, custoEcol = meioTransportes[veiculo]
         if custoEcol < pegadaEcológica:
             velocidade = calculaSpeedConsoantePeso(entrega, estafeta, distancia)
             if velocidade > 0:
@@ -80,11 +69,11 @@ def calculaSpeedConsoantePeso(entrega, estafeta, distancia):  # calcula velocida
         print("Excede o peso maximo do estafeta", estafeta.nome)
         return -1
 
+
 def listarRanking(listaEstafetas):
     sorted_list = sorted(listaEstafetas, key=lambda x: x.ranking, reverse=True)
-    i = 0
-    for estafeta in sorted_list:
-        print(f"{i}:{estafeta.nome}, ")
+    for i, estafeta in enumerate(sorted_list, start=1):
+        print(f"{i}:{estafeta.nome}: {estafeta.ranking}")
 
 
 def copy_estafeta(estafeta):
@@ -92,6 +81,7 @@ def copy_estafeta(estafeta):
 
 
 def compareAlgorithms(g, listaEstafetas):
+    # results = custo caminhos, path = caminho
     DFS_results = {}
     DFS_path = {}
     BFS_results = {}
@@ -204,9 +194,10 @@ def printPaths(caminho_final):
 
         for n_entrega, (caminho, custo) in enumerate(paths, start=1):
             custo_total += custo
-            print(f"Caminho para entrega {n_entrega}: {caminho} - Custo: {custo/10}")
+            print(f"Caminho para entrega {n_entrega}: {caminho} - Custo: {custo / 10}")
 
         print(f"Distancia percorrida por {estafeta}: {custo_total / 10}\n")
+
 
 def printPathsTotal(caminho_final):
     for estafeta, paths in caminho_final.items():
