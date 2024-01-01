@@ -85,7 +85,7 @@ def terminarEntrega(entrega, estafeta):
 
 
 def organizaLista(g, partida,
-                 listaEntregas):  # coloca em primeiro da lista a encomenda mais próxima de onde o estafeta se encontra
+                  listaEntregas):  # coloca em primeiro da lista a encomenda mais próxima de onde o estafeta se encontra
     posLista = 0
     posProx = 0
     maisProx = None
@@ -177,6 +177,40 @@ def iniciarEntregasBFS(g, estafetas_loaded):
     return caminho_final, perc_algoritmo
 
 
+def iniciarEntregasCustoUniforme(g, estafetas_loaded):
+    caminho_final = {}
+
+    perc_algoritmo = {}
+    for estafeta in estafetas_loaded:
+        distTotal = 0
+        atual = 'Rua da Universidade'  # centro de distribuição
+        # for entrega in estafeta.conjuntoEntregas:
+        caminho_estafeta = []
+        path_algoritmo = []
+        while estafeta.conjuntoEntregas:
+            entrega = estafeta.conjuntoEntregas[0]
+            path, custo, total_path = g.procura_custo_uniforme(atual, entrega.rua)
+            path_algoritmo.append(total_path)
+            if (path, custo) is None:
+                print("Não foi possivel realizar a entrega")
+                print(entrega.rua)
+                estafeta.conjuntoEntregas.pop(0)
+            else:
+                caminho, dist = (path, custo)
+                total = (path, custo)
+                distTotal += dist
+                caminho_estafeta.append(total)
+                terminarEntrega(entrega, estafeta)
+                atual = entrega.rua
+
+        perc_algoritmo[estafeta.nome] = path_algoritmo
+        caminho_final[estafeta.nome] = caminho_estafeta
+
+        print("O estafeta", estafeta.nome, "percorreu um total de", (distTotal / 10), "decâmetros")
+
+    return caminho_final, perc_algoritmo
+
+
 def iniciarEntregaGreedy(g, estafetas_loaded):
     caminho_final = {}
     perc_algoritmo = {}
@@ -221,7 +255,6 @@ def iniciarEntregaAstar(g, estafetas_loaded):
         while estafeta.conjuntoEntregas:
             listaEntregas = organizaLista(g, atual, estafeta.conjuntoEntregas)
             entrega = listaEntregas[0]
-            # entrega = estafeta.conjuntoEntregas[0]
             g.calculate_all_heuristics(atual, entrega.rua)
             path, custo, total_path = g.procura_aStar(atual, entrega.rua)
             path_algoritmo.append(total_path)

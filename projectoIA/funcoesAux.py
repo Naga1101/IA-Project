@@ -86,6 +86,8 @@ def compareAlgorithms(g, listaEstafetas):
     DFS_path = {}
     BFS_results = {}
     BFS_path = {}
+    UC_results = {}
+    UC_path = {}
     Greedy_results = {}
     Greedy_path = {}
     aStar_results = {}
@@ -136,6 +138,29 @@ def compareAlgorithms(g, listaEstafetas):
     print("BFS Results:", BFS_results)
 
     for estafeta in listaEstafetas:
+        distUC = 0
+        atual = 'Rua da Universidade'  # centro de distribuição
+        entregas_UC = estafeta.conjuntoEntregas.copy()
+        caminho_estafeta = []
+
+        while entregas_UC:
+            entrega = entregas_UC[0]
+            res = g.procura_custo_uniforme(atual, entrega.rua)
+
+            if res is None:
+                entregas_UC.pop(0)
+            else:
+                caminho, dist, resto = res
+                distUC += dist
+                atual = entrega.rua
+                caminho_estafeta.append(caminho)
+                entregas_UC.pop(0)
+
+        UC_results[estafeta.nome] = distUC / 10
+        UC_path[estafeta.nome] = caminho_estafeta
+    print("Uniform Cost Results:", UC_results)
+
+    for estafeta in listaEstafetas:
         dist_greedy = 0
         atual = 'Rua da Universidade'  # centro de distribuição
         estafeta_Greedy = copy_estafeta(estafeta)
@@ -184,7 +209,7 @@ def compareAlgorithms(g, listaEstafetas):
 
     print("aStar Results:", aStar_results)
 
-    return DFS_path, BFS_path, Greedy_path, aStar_path
+    return DFS_path, BFS_path, Greedy_path, aStar_path, UC_path
 
 
 def printPaths(caminho_final):

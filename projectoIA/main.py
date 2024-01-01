@@ -17,12 +17,13 @@ def main():
         print("4-Imprimir arestas de Grafo")
         print("5-DFS")
         print("6-BFS")
-        print("7-A*")
-        print("8-Gulosa")
-        print("9-Comparar Algoritmos")
-        print("10-Estafetas")
-        print("11-Adicionar Encomenda")
-        print("12-Listar Ranking")
+        print("7-Custo Uniforme")
+        print("8-A*")
+        print("9-Gulosa")
+        print("10-Comparar Algoritmos")
+        print("11-Estafetas")
+        print("12-Adicionar Encomenda")
+        print("13-Listar Ranking")
         print("0-Saír")
 
         saida = int(input("introduza a sua opcao-> "))
@@ -68,6 +69,14 @@ def main():
             input("prima enter para continuar")
 
         elif saida == 7:
+            path, total_path = iniciarEntregasCustoUniforme(g, estafetas_loaded)
+            printPaths(path)
+            opcao = input("Pretende ver o caminho percorrido pelo algoritmo? S/N\n")
+            if opcao == "S":
+                printPathsTotal(total_path)
+            input("prima enter para continuar")
+
+        elif saida == 8:
             path, total_path = iniciarEntregaAstar(g, estafetas_loaded)
             printPaths(path)
             opcao = input("Pretende ver o caminho percorrido pelo algoritmo? S/N\n")
@@ -78,7 +87,7 @@ def main():
             #print(path)
             input("prima enter para continuar")
 
-        elif saida == 8:
+        elif saida == 9:
             path, total_path = iniciarEntregaGreedy(g, estafetas_loaded)
             printPaths(path)
             opcao = input("Pretende ver o caminho percorrido pelo algoritmo? S/N\n")
@@ -86,20 +95,22 @@ def main():
                 printPathsTotal(total_path)
             input("prima enter para continuar")
 
-        elif saida == 9:
-            DFS_Path, BFS_Path, Greedy_path, aStar_path = compareAlgorithms(g, estafetas_loaded)
+        elif saida == 10:
+            DFS_Path, BFS_Path, Greedy_path, aStar_path, UC_path = compareAlgorithms(g, estafetas_loaded)
             opcao = input("Pretende ver o caminho obtido pelos algoritmos? S/N\n")
             if opcao == "S":
                 print("Caminho obtido pelo algoritmo DFS")
                 printPathsTotal(DFS_Path)
                 print("Caminho obtido pelo algoritmo BFS")
                 printPathsTotal(BFS_Path)
+                print("Caminho obtido pelo algoritmo Uniform Cost")
+                printPathsTotal(UC_path)
                 print("Caminho obtido pelo algoritmo Greedy")
                 printPathsTotal(Greedy_path)
                 print("Caminho obtido pelo algoritmo aStar")
                 printPathsTotal(aStar_path)
 
-        elif saida == 10:
+        elif saida == 11:
             for estafeta_obj in estafetas_loaded:
                 print(f"Nome: {estafeta_obj.nome}")
                 for entrega_obj in estafeta_obj.conjuntoEntregas:
@@ -115,14 +126,15 @@ def main():
                     g.desenha()
                 print("\n")
 
-        elif saida == 11:
+        elif saida == 12:
             entregaNova, dist = adiciona_entrega(g, "DFS")
             atribui_estafeta(entregaNova, estafetas_loaded, dist)
             input("prima enter para continuar")
 
-        elif saida == 12:
+        elif saida == 13:
             listarRanking(estafetas_loaded)
             input("prima enter para continuar")
+
         else:
             print("opcao invalida")
             input("prima enter para continuar")
