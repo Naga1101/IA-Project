@@ -7,7 +7,7 @@ def main():
     estafetas_loaded = load_Estafetas(data_filename)
 
     g = Graph()
-    g.parse_file('teste.csv')
+    g.parse_file('Dados.csv')
 
     saida = -1
     while saida != 0:
