@@ -34,7 +34,7 @@ def define_codigo():
     return codigoNovo
 
 
-def adiciona_entrega(g, algoritmo):
+def adiciona_entrega(g):
     print("Preencha as informações relativas à sua encomenda")
     eC = define_codigo()
     eR = input("Morada: ")
@@ -48,14 +48,27 @@ def adiciona_entrega(g, algoritmo):
     except ValueError as e:
         print(f"Error: {e}")
 
-    if algoritmo == 'DFS':
-        inicio = 'Travessa da Avenida de São Miguel'
-        res = g.procura_DFS(inicio, eR, path=[], visited=set())
-        caminho, dist = res
+    inicio = 'Rua da Universidade'
+    res = g.procura_DFS(inicio, eR, path=[], visited=set())
+    _, distDFS, _ = res
+    res = g.procura_BFS(inicio, eR)
+    _, distBFS, _ = res
+    res = g.procura_custo_uniforme(inicio, eR)
+    _, distCU, _ = res
+    g.calculate_all_heuristics(inicio, eR)
+    res = g.greedy(inicio, eR)
+    _, distGRE, _ = res
+    res = g.procura_aStar(inicio, eR)
+    _, distAS, _ = res
 
+
+    distancias = [('A-Star', distAS),('DFS', distDFS),('BFS', distBFS),('Custo Uniforme', distCU),('Greedy', distGRE)]
+
+    algoritmoSelec, distMenor = min(distancias, key=lambda x: x[1])
+    
     entregaNova = Entrega(eC, eR, eF, eV, eP, eD)
-    print(entregaNova)
-    return entregaNova, dist
+    print("O algoritmo que calculou a menor distância para a entrega",entregaNova, "foi o", algoritmoSelec)
+    return entregaNova, distMenor
 
 
 def getPrecoPorEntrega(self, entrega, estafeta):  # calcula o preço de uma entrega

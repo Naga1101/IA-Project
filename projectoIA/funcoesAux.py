@@ -74,6 +74,43 @@ def listarRanking(listaEstafetas):
     sorted_list = sorted(listaEstafetas, key=lambda x: x.ranking, reverse=True)
     for i, estafeta in enumerate(sorted_list, start=1):
         print(f"{i}:{estafeta.nome}: {estafeta.ranking}")
+        
+def rankingVeiculos(listaEstafetas):
+    mediaBicicleta = 0
+    estBicl = 0
+    mediaMota = 0
+    estMota = 0
+    mediaCarro = 0
+    estCarro = 0
+    
+    for estafeta in listaEstafetas:
+        veiculo = estafeta.meioTransporte
+        if veiculo == 'bicicleta':
+            estBicl += 1
+            mediaBicicleta += (estafeta.ranking + 1) 
+        elif veiculo == 'mota':
+            estMota += 1
+            mediaMota += (estafeta.ranking - 0.5)
+        else:
+            estCarro += 1
+            mediaCarro += (estafeta.ranking - 1)
+    
+    mediaBicicleta = mediaBicicleta/estBicl
+    if mediaBicicleta > 5: mediaBicicleta = 5
+    if mediaBicicleta < 0: mediaBicicleta = 0
+    mediaMota = mediaMota/estMota
+    if mediaMota > 5: mediaMota = 5
+    if mediaMota < 0: mediaMota = 0
+    mediaCarro = mediaCarro/estCarro
+    if mediaCarro > 5: mediaCarro = 5
+    if mediaCarro < 0: mediaCarro = 0
+    
+    data = [('Bicicleta', mediaBicicleta),('Mota', mediaMota),('Carro', mediaCarro)]
+    medias = sorted(data, key=lambda x: x[1], reverse=True)
+    for rank, (vehicle, media) in enumerate(medias, start=1):
+        print(f"{rank}: {vehicle} : {media}")
+    
+    
 
 
 def copy_estafeta(estafeta):
