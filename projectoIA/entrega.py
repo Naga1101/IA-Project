@@ -64,11 +64,20 @@ def adiciona_entrega(g):
 
     distancias = [('A-Star', distAS),('DFS', distDFS),('BFS', distBFS),('Custo Uniforme', distCU),('Greedy', distGRE)]
 
-    algoritmoSelec, distMenor = min(distancias, key=lambda x: x[1])
-    
+    menor_distancia = min(distancias, key=lambda x: x[1])[1]
+    algoritmos_menores = [(algo, dist) for algo, dist in distancias if dist == menor_distancia]
+
     entregaNova = Entrega(eC, eR, eF, eV, eP, eD)
-    print("O algoritmo que calculou a menor distância para a entrega",entregaNova, "foi o", algoritmoSelec)
-    return entregaNova, distMenor
+
+    if len(algoritmos_menores) == 1:
+        algoritmoSelec, _ = algoritmos_menores[0]
+        print("O algoritmo que calculou a menor distância para a entrega", entregaNova, "foi o", algoritmoSelec)
+    else:
+        print("Os algoritmos que calcularam a menor distância para a entrega", entregaNova, "foram:")
+        for algoritmo, dist in algoritmos_menores:
+            print(algoritmo, dist)
+
+    return entregaNova, menor_distancia
 
 
 def getPrecoPorEntrega(self, entrega, estafeta):  # calcula o preço de uma entrega
@@ -112,9 +121,9 @@ def organizaLista(g, partida,
             maisProx = entrega
             posProx = posLista  # no caso de ser o primeiro diz que a posição é 0
         posLista += 1
-        aux = listaEntregas[0]
-        listaEntregas[0] = maisProx
-        listaEntregas[posProx] = aux
+    aux = listaEntregas[0]
+    listaEntregas[0] = maisProx
+    listaEntregas[posProx] = aux
     return listaEntregas
 
 

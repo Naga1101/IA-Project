@@ -73,7 +73,7 @@ def calculaSpeedConsoantePeso(entrega, estafeta, distancia):  # calcula velocida
 def listarRanking(listaEstafetas):
     sorted_list = sorted(listaEstafetas, key=lambda x: x.ranking, reverse=True)
     for i, estafeta in enumerate(sorted_list, start=1):
-        print(f"{i}:{estafeta.nome}: {estafeta.ranking}")
+        print(f"{i}:{estafeta.nome}: {estafeta.ranking:.1f}")
         
 def rankingVeiculos(listaEstafetas):
     mediaBicicleta = 0
@@ -108,7 +108,7 @@ def rankingVeiculos(listaEstafetas):
     data = [('Bicicleta', mediaBicicleta),('Mota', mediaMota),('Carro', mediaCarro)]
     medias = sorted(data, key=lambda x: x[1], reverse=True)
     for rank, (vehicle, media) in enumerate(medias, start=1):
-        print(f"{rank}: {vehicle} : {media}")
+        print(f"{rank}: {vehicle} : {media:.1f}")
     
     
 
